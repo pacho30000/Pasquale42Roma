@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 12:58:56 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/10 14:39:07 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/01/11 16:04:51 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/01/11 16:05:59 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalpha(int c)
-{
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-		return (1);
-	else
-		return (0);
-}
+#ifndef LIBFT_H
+# define LIBFT_H
+
+# include <string.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+#endif

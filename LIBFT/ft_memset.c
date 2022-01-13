@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:21:06 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/11 16:32:07 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/13 17:40:19 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 void	*ft_memset(void *b, int c, size_t len)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i != len)
 	{
-		((unsigned char *)b)[i] == c;
+		((unsigned char *)b)[i] = ((unsigned char)c);
 		i++;
 	}
+	return (b);
 }

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:44:11 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/13 13:59:48 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/13 17:09:44 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < n)
 	{
-		((unsigned char *)src)[i] == ((unsigned char *)dst)[i];
+		((unsigned char *)src)[i] = ((unsigned char *)dst)[i];
 		i++;
 	}
 	return (dst);

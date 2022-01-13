@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:35:10 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/11 17:03:36 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/13 17:41:02 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,5 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	int	i;
-
-	i = 0;
-	if (i != n)
-	{
-		((unsigned char *)s)[i] == '0';
-		i++;
-	}
+	ft_memset(s, 0, n);
 }

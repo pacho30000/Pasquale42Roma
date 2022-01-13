@@ -6,28 +6,57 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/13 12:54:31 by pcatapan          #+#    #+#              #
-#    Updated: 2022/01/13 13:48:50 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/01/13 17:25:07 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS		= *.c
+NAME = libft.a
 
-OBJS		= *.o
+SRCS = ft_isalnum.c \
+	   ft_isalpha.c \
+	   ft_isascii.c \
+	   ft_isdigit.c \
+	   ft_isprint.c \
+	   ft_strlcat.c \
+	   ft_strlcpy.c \
+	   ft_strlen.c \
+	   ft_strncmp.c \
+	   ft_memset.c \
+	   ft_tolower.c \
+	   ft_toupper.c \
+	   ft_bzero.c \
+	   ft_memmove.c \
+	   ft_memcpy.c \
+	   ft_memchr.c \
+	   ft_memcmp.c \
+	   ft_strchr.c \
+	   ft_strnstr.c \
+	   ft_strrchr.c \
 
-HEAD		= libft.h
+OBJS	= $(SRCS:.c=.o)
+OBJS_B	= $(SRCS_B:.c=.o)
+RM		= rm -f
+LIBC	= ar -rcs
+FLAGS	= -Wall -Wextra -Werror
+INCS	= .
 
-NAME		= libft.a
+.c.o :
+	${CC} ${FLAGS} -c $< -o ${<:.c=.o} -I${INCS}
 
-RM			= rm -f
+$(NAME): ${OBJS}
+	${LIBC} $(NAME) $(OBJS)
 
-GCC			= GCC
+all: $(NAME)
 
-CFLAGS		= -Werror -Wall -Wextra
+bonus: $(NAME) $(OBJS_B)
+	${LIBC} $(NAME) $(OBJS_B)
+    
+fclean: clean
+	$(RM) $(NAME) $(bonus)
 
-all:		${NAME}
+clean:
+	$(RM) -f $(OBJS) $(OBJS_B)
+    
+re:	fclean all
 
-.c.o:
-	${GCC} ${FLAGS} -c ${SRCS}
-	
-${NAME}:	${OBJS}
-	${NAME}	${GCC} -I ${HEAD} -o ${OBJS} ${}
+.PHONY: all bonus clean fclean re .c.o

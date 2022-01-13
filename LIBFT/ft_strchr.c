@@ -6,29 +6,29 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 15:36:53 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/13 14:04:19 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/13 14:25:49 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    *ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-    int i;
-    
-    i = 0;
-    while (s[i] != '\0')
-    {
-        if (s[i] != '\0')
-        {
-            while (s[i] != c)
-                i++;
-            while (s[i] != '\0')
-            {
-                write(1, &s[i], 1);
-                i++;
-            }
-        }
-    }
-    return (0);
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] != '\0')
+		{
+			while (s[i] != c)
+				i++;
+			while (s[i] != '\0')
+			{
+				write(1, &s[i], 1);
+				i++;
+			}
+		}
+	}
+	return (0);
 }

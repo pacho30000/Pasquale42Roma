@@ -6,31 +6,31 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 16:04:53 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/12 16:11:51 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/13 14:30:05 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    *ft_strrchr(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (s[i] != '\0')
-        i++;
-    while (i == 0)
-    {
-        if (s[i] != c)
-            i--;
-        else
-        {
-            while (i == 0)
-            {
-                write (1, &s[i], 1);
-                i--;
-            }
-        }
-    }
-    return (0);
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	while (i == 0)
+	{
+		if (s[i] != c)
+			i--;
+		else
+		{
+			while (i == 0)
+			{
+				write (1, &s[i], 1);
+				i--;
+			}
+		}
+	}
+	return (0);
 }

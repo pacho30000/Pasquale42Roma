@@ -6,18 +6,18 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 15:27:48 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/12 15:30:33 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/13 14:05:35 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_tolower(int c)
+int ft_tolower (int c)
 {
     int n;
     if (c >= 65 && c <= 90)
         n = c + 32;
     else
         return (c);
-    return (n)   
+    return (n);
 }

@@ -6,13 +6,13 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 14:39:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/12 15:03:04 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/13 14:05:15 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_lenght(char *src)
+int ft_lenght (char *src)
 {
     int i;
 
@@ -24,7 +24,7 @@ int ft_lenght(char *src)
     return (i);
 }
 
-size_t  strlcpy(char *dst, const char *src, sie_t destsize)
+size_t  ft_strlcpy(char *dst, const char *src, size_t destsize)
 {
     int i;
     

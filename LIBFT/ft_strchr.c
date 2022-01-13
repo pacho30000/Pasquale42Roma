@@ -6,13 +6,13 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 15:36:53 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/12 16:05:14 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/13 14:04:19 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    *ft_strchr (const char *s, int c)
+char    *ft_strchr(const char *s, int c)
 {
     int i;
     

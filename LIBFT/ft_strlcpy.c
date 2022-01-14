@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 14:39:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/13 17:06:50 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/14 18:27:21 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,21 @@
 size_t	ft_strlcpy(char *dst, const char *src, size_t destsize)
 {
 	size_t	i;
-	size_t	j;
+	size_t	n;
 
-	i = 0;
-	j = 0;
-	while (src[j] != '\0')
+	n = 0;
+	while (src[n] != '\0')
 	{
-		j++;
+		n++;
 	}
-	return (i);
 	if (destsize == 0)
-		return (j);
-	while (src[i] != '\0' && i < destsize)
+		return (n);
+	i = 0;
+	while (src[i] != '\0' && i < destsize - 1)
 	{
-		dst[i] = ((unsigned *)src)[i];
+		dst[i] = src[i];
 		i++;
 	}
 	dst[i] = '\0';
-	return (j);
+	return (n);
 }

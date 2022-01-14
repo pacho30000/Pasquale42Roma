@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 15:36:53 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/13 14:25:49 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/14 15:30:59 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,16 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (s[i] != c && s[i] != '\0')
 	{
-		if (s[i] != '\0')
-		{
-			while (s[i] != c)
-				i++;
-			while (s[i] != '\0')
-			{
-				write(1, &s[i], 1);
-				i++;
-			}
-		}
+		i++;
 	}
-	return (0);
+	if (s[i] == c)
+	{
+		return ((char *)s + i);
+	}
+	return (NULL);
 }

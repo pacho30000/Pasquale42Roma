@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 16:12:45 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/13 17:17:40 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/14 17:55:18 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 
 	i = 0;
 	j = 0;
-	while (((unsigned char *)haystack)[i] && ((unsigned char *)needle)[j]
-		&& len > 0)
+	if (needle[j] == '\0')
+		return ((char *) haystack);
+	while (haystack[i] && i < len)
 	{
 		j = 0;
-		if (((unsigned char *)needle)[j] != ((unsigned char *)haystack)[i])
+		if (haystack[i] == needle[j] && needle[j] && i < len)
 		{
-			i++;
-			len--;
+			while (haystack[i] == needle[j] && needle[j] && i < len)
+			{
+				i++;
+				j++;
+				if (needle[j] == '\0')
+					return ((char *)&haystack[i - j]);
+			}
 		}
-		while (((unsigned char *)haystack)[i] == ((unsigned char *)needle)[j]
-			&& len > 0 && ((unsigned char *)haystack)[i])
-		{
-			i++;
-			j++;
-			len--;
-		}
+		i++;
 	}
-	return (0);
+	return (NULL);
 }

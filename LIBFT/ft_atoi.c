@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 10:01:00 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/15 11:57:54 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/15 17:59:53 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_atoi(const char *str)
 {
-	int	i;
-	int	s;
-	int	num;
+	size_t	i;
+	size_t	s;
+	size_t	num;
 
 	i = 0;
 	num = 0;

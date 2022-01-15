@@ -1,37 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/11 17:20:42 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/15 12:01:17 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/01/15 12:08:22 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/01/15 12:14:39 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
-{
-	size_t	i;
-
-	if (!dst && !src)
-		return (NULL);
-	i = 0;
-	if (dst - src > 0)
-	{
-		while (len > 0)
-		{
-			len--;
-			((char *)dst)[len] = ((char *)src)[len];
-		}
-		return (dst);
-	}
-	while (i < len)
-	{
-		((char *)dst)[i] = ((char *)src)[i];
-		i++;
-	}
-	return (dst);
-}
+void	*ft_calloc(size_t count, size_t size)

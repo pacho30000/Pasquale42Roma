@@ -6,7 +6,7 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/13 12:54:31 by pcatapan          #+#    #+#              #
-#    Updated: 2022/01/13 17:25:07 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/01/15 12:11:30 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ SRCS = ft_isalnum.c \
 	   ft_strchr.c \
 	   ft_strnstr.c \
 	   ft_strrchr.c \
+	   ft_atoi.c \
+	   ft_calloc.c \
 
 OBJS	= $(SRCS:.c=.o)
 OBJS_B	= $(SRCS_B:.c=.o)

@@ -1,37 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/11 17:20:42 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/15 12:01:17 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/01/15 10:01:00 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/01/15 11:57:54 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+int	ft_atoi(const char *str)
 {
-	size_t	i;
+	int	i;
+	int	s;
+	int	num;
 
-	if (!dst && !src)
-		return (NULL);
 	i = 0;
-	if (dst - src > 0)
-	{
-		while (len > 0)
-		{
-			len--;
-			((char *)dst)[len] = ((char *)src)[len];
-		}
-		return (dst);
-	}
-	while (i < len)
-	{
-		((char *)dst)[i] = ((char *)src)[i];
+	num = 0;
+	s = 1;
+	while ((str[i] <= 13 && str[i] >= 9) || str[i] == ' ')
 		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+		{
+			s *= -1;
+			i++;
+		}
+		else
+			i++;
 	}
-	return (dst);
+	while (str[i] >= '0' && str[i] <= '9')
+		num = num * 10 + (str[i++] - '0');
+	s *= num;
+	return (s);
 }

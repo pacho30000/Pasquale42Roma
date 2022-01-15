@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/15 12:43:47 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/15 17:06:03 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/01/15 13:50:05 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/01/15 16:51:34 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	unsigned int		l;
-	char				*str;
-	unsigned int		i;
+	int	i;
+	int	j;
 
-	l = ft_strlen((char *)s);
-	str = (char *)malloc(len * sizeof(char) + 1);
-	i = 0;
-	if (str == NULL)
-		return (NULL);
-	while (i <= l && len > 0)
-	{
-		str[i] = s[start];
-		i++;
-		start++;
-		len--;
-	}
-	str[i] = '\0';
-	return (str);
+	j = 0;
+	while (*s1 && ft_strchr(set, *s1))
+		s1++;
+	i = ft_strlen((char *)s1);
+	while (i && ft_strchr(set, s1[i - 1]))
+		i--;
+	return (ft_substr(s1, 0, i));
 }

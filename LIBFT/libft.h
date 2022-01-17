@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 16:04:51 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/16 20:43:20 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/17 13:47:59 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 # include <unistd.h>
 # include <stdio.h>
 
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
 void	ft_bzero(void *s, size_t n);
 int		ft_atoi(const char *str);
 int		ft_isalnum(int c);

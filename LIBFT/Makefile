@@ -6,7 +6,7 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/13 12:54:31 by pcatapan          #+#    #+#              #
-#    Updated: 2022/01/17 13:42:16 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/01/17 14:53:00 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,11 @@ SRCS = ft_isalnum.c \
 	   ft_putendl_fd.c \
 	   ft_putnbr_fd.c \
 	
-SRCS_B =
+SRCS_B = ft_lstnew.c \
+		 ft_lstadd_front.c \
+		 ft_lstsize.c \
+		 ft_lstlast.c \
+		 ft_lstadd_back.c \
 
 OBJS	= $(SRCS:.c=.o)
 OBJS_B	= $(SRCS_B:.c=.o)

@@ -6,7 +6,7 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/13 12:54:31 by pcatapan          #+#    #+#              #
-#    Updated: 2022/01/17 14:53:00 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/01/17 15:48:43 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,10 @@ SRCS_B = ft_lstnew.c \
 		 ft_lstsize.c \
 		 ft_lstlast.c \
 		 ft_lstadd_back.c \
+		 ft_lstdelone.c \
+		 ft_lstclear.c \
+		 ft_lstiter.c \
+		 ft_lstmap.c \
 
 OBJS	= $(SRCS:.c=.o)
 OBJS_B	= $(SRCS_B:.c=.o)

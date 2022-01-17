@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 16:12:45 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/14 17:55:18 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/17 19:07:31 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 
 	i = 0;
 	j = 0;
-	if (needle[j] == '\0')
-		return ((char *) haystack);
+	if (!needle[j])
+		return ((char *) haystack[i]);
 	while (haystack[i] && i < len)
 	{
 		j = 0;

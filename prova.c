@@ -1,16 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   prova.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 11:38:30 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/18 21:16:57 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/01/18 17:09:05 by pcatapan          #+#    #+#             */
+/*   Updated: 2022/01/18 21:16:16 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+
+size_t	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	unsigned int		l;
+	char				*str;
+	unsigned int		i;
+
+	if (!s)
+		return (NULL);
+	l = ft_strlen((char *)s);
+	if (l < len)
+		str = (char *)malloc(l * sizeof(char) + 1);
+	else
+		str = (char *)malloc(len * sizeof(char) + 1);
+	i = 0;
+	if (str == NULL)
+		return (NULL);
+	while (i <= l && len > 0 && start <= l)
+	{
+		str[i] = s[start];
+		i++;
+		start++;
+		len--;
+	}
+	str[i] = '\0';
+	return (str);
+}
 
 size_t	ft_countarray(char const *s, char c)
 {
@@ -57,7 +97,7 @@ char	**ft_split(char const *s, char c)
 	return (str);
 }
 
-int	main(void)
+int        main(void)
 {
     int i = 0;
     char **tab;

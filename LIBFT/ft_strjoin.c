@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 13:11:01 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/17 18:53:37 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/18 20:23:58 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-		str = (char *)malloc(sizeof(char)
+	str = (char *)malloc(sizeof(char)
 			* (ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1));
 	if (str == NULL)
 		return (0);

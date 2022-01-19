@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 11:38:30 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/18 21:16:57 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/19 22:59:58 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,14 @@ size_t	ft_countarray(char const *s, char c)
 	i = 0;
 	array = 0;
 	if (!s)
-		return(0);
+		return (0);
+	if (s[i] && s[i] != c)
+		array++;
+	else if (s[i] && s[i] == c)
+		i++;
 	while (s[i])
 	{
-		if (s[i] == c && i != 0 && s[i - 1] != c)
+		if (s[i] != c && s[i - 1] == c)
 			array++;
 		i++;
 	}
@@ -41,32 +45,28 @@ char	**ft_split(char const *s, char c)
 	j = 0;
 	i = 0;
 	array = ft_countarray(s, c);
-	str = malloc(array * sizeof(char) + 1);
-	if (!str || str == 0)
+	str = malloc((array + 1) * sizeof(char *));
+	if (!str || !s)
 		return (NULL);
-	while (s[i] && j != array)
+	while (s[i] && j < array)
 	{
-		while (s[i++] == c)
-			start = i;
-		while (s[i] != c)
+		while (s[i] == c)
 			i++;
-		str[j] = malloc(i - start * sizeof(char) + 1);
-		str[j++] = ft_substr(s, start, i - start);
+		start = i;
+		while (s[i] != c && s[i] != '\0')
+			i++;
+		str[j] = ft_substr(s, start, i - start);
+		j++;
 	}
 	str[j] = NULL;
 	return (str);
 }
 
-int	main(void)
+int main()
 {
-    int i = 0;
-    char **tab;
-        
-    tab = ft_split("        ", ' ');
-    while (i < 2)
-    {
-        printf("string %d : %s\n", i, tab[i]);
-        i++;
-    }
-    return (0);
+	char **porco;
+
+	porco = ft_split("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse", ' ');
+	printf("%s", porco[0]);
+	return (0);
 }

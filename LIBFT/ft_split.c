@@ -23,7 +23,7 @@ size_t	ft_countarray(char const *s, char c)
 		return (0);
 	if (s[i] && s[i] != c)
 		array++;
-	else if (s[i] && s[i] == c)
+	if (s[i])
 		i++;
 	while (s[i])
 	{

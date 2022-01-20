@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 11:38:30 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/19 22:59:58 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:32:33 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,4 @@ char	**ft_split(char const *s, char c)
 	}
 	str[j] = NULL;
 	return (str);
-}
-
-int main()
-{
-	char **porco;
-
-	porco = ft_split("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse", ' ');
-	printf("%s", porco[0]);
-	return (0);
 }

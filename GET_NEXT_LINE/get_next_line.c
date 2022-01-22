@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 19:11:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/22 20:25:03 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/22 20:46:25 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,3 @@ char	*get_next_line(int fd)
 	save = ft_n_line(save);
 	return (line);
 }
-
-/*
-int main()
-{
-	printf("%s", get_next_line(open("empty.txt", O_RDONLY)));
-}
-*/

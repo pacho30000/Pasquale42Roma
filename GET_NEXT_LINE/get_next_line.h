@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 19:11:24 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/22 20:24:39 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/22 20:29:11 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 8
+# define BUFFER_SIZE 8
 # endif
 
 char	*get_next_line(int fd);

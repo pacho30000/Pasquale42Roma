@@ -3,25 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: epuclla <epuclla@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/22 19:11:24 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/23 19:35:30 by pcatapan         ###   ########.fr       */
+/*   Created: 2020/06/18 00:26:24 by epuclla           #+#    #+#             */
+/*   Updated: 2020/06/18 12:22:10 by epuclla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
 
-# include <stdlib.h>
 # include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
 
-char	*get_next_line(int fd);
-char	*ft_n_line(char *save);
-char	*ft_p_line(char *save);
-char	*ft_reads(char *save, int fd);
-size_t	ft_strlen(char *s);
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4000
+# endif
+
+# ifndef FD_SIZE
+#  define FD_SIZE 65535
+# endif
+
 char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strdup(const char *s1);
+size_t	ft_strlen(const char *str);
+char	*ft_strnew(size_t size);
+void	*ft_memalloc(size_t size);
+void	*ft_memset(void *b, int c, size_t len);
+int		ft_memdel(void **ptr);
+int		get_next_line(int fd, char **line);
 
 #endif

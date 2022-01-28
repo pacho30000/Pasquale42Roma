@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 16:18:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/28 03:10:32 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/28 09:04:50 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	ft_printf(const char *str, ...)
 		count += ft_char(str[i++]);
 	while (str[i] != '%')
 		i++;
-	i++;
 	while (str[i] != '\0')
 	{
 		if (str[i] == 's')
@@ -55,9 +54,15 @@ int	ft_printf(const char *str, ...)
 		else if (str[i] == 'd' || str[i] == 'i')
 			count += ft_putnumber(va_arg(var,int));
 		else if (str[i] == 'u')
-			count += ft_unsigned(va_arg(var,unsigned long));
+			count += ft_unsigned(va_arg(var,unsigned int));
 		else if (str[i] == 'x' || str[i] == 'X')
 			count += ft_esadecimal(va_arg(var, unsigned int), str[i]);
+		else if (str[i] == '%' && str[i + 1] == '%')
+		{
+			write(1, "%%", 1);
+			count++;
+			i++;
+		}
 		else if (str[i] != '%')
 		{
 			write (1, &str[i], 1);
@@ -69,12 +74,14 @@ int	ft_printf(const char *str, ...)
 	return (count);
 }
 
-int main()
-{
-	int ret;
 
-	ret = 5;
-	ft_printf("%d",ft_printf("%p", &ret));
-	printf("\n\n");
-	printf("%d", printf("%p", &ret));
-}
+// int main()
+// {
+// 	int ret;
+ 	
+//  	ret = 5;
+//   	ft_printf("%d",ft_printf(" %% "));
+//   	//printf("\n\n");
+//   	printf("%d", printf(" %% "));
+//  }
+

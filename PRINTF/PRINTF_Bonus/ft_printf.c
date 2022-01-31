@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 13:00:24 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/31 20:18:57 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/01/31 21:20:14 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,22 @@ int	ft_string(const char *str, t_flag *flag)
 	int	i;
 
 	i = 0;
-	//if (flag->dot == 1)
+	if (flag->dot == 1)
+	{
+		while (str[i] != '%' && i < flag->space)
+		{
+			write (1, &str[i], 1);
+			i++;
+		}
+	}
+	else
+	{
 		while (str[i] != '%')
 		{
 			write (1, &str[i], 1);
 			i++;
 		}
+	}
 	return (i);
 }
 

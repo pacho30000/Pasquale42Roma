@@ -1,0 +1,9 @@
+{
+	"files.associations": {
+		"__locale": "c",
+		"istream": "c",
+		"locale": "c",
+		"memory": "c",
+		"vector": "c"
+	}
+}

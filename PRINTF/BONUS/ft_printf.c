@@ -6,13 +6,13 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:15:37 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/02/03 18:45:34 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/02/03 18:55:07 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_write(const char *str, int i, t_flag *flag, va_list par)
+int	ft_write(t_flag *flag, va_list par)
 {
 	int	count;
 
@@ -48,11 +48,12 @@ int	ft_check(const char *str, int i, t_flag *flag)
 		flag->hastag = 1;
 	else if ((str[i] >= 'a' && str[i] <= 'z') || str[i] == 'X')
 		flag->type = str[i];
-	else
+	/*else
 	{
 		write (1, "Errore : Flag non riconosciuta!", 31);
 		return (0);
 	}
+	*/
 	return (i);
 }
 
@@ -76,10 +77,12 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			i++;
-			i += ft_check(str, i, &flag);
+			flag.type = 'c';
+			//i += ft_check(str, i, &flag);
 			flag.type = str[i];
-			count += ft_write(str, i, &flag, par);
+			count += ft_write(&flag, par);
 		}
+		//i++;
 	}
 	return (count);
 }

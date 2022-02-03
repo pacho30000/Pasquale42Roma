@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:34:42 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/02/03 18:37:51 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/02/03 18:49:40 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int ft_check_after(t_flag *flag, int count)
     if (flag->hastag == 1 && (flag->type == 'x' || flag->type == 'X'))
     {
         ret += ft_putchar ('0');
-        ret += ft_putchar (&flag->type);
+        ret += ft_putchar (flag->type);
 
     }
     ret = count + len;
@@ -55,7 +55,7 @@ int	ft_putnb_b(int long long nbr, char *base, long l_base, t_flag *flag)
 {
 	int	count;
 
-	count = ft_l(nbr, base, flag);
+	count = ft_l(nbr, l_base, flag);
 	if (nbr < 0)
 	{
 		count += ft_putchar('-');

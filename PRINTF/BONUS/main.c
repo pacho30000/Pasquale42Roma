@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 13:31:31 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/02/02 18:04:47 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/02/03 18:30:00 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main()
 	int	t;
 
 	t = 0;
-	printf("\n%d", printf("%#d" , -1));
+	printf("\n%d", printf("%-5i" , -1001));
 	//printf("%.12i" , 10);
 	//printf("%.2s" , "aaa");
 	//ft_printf("%d", ft_printf(" %c " , '0'));

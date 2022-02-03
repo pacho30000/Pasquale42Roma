@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:13:37 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/02/02 20:15:48 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/02/03 17:36:23 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ typedef struct s_flag
 	int		space;
 	int		plus;
 	int		less;
+	int		less_par;
 	int		num;
 }	t_flag;
 
-int				ft_printf(const char *str, ...);
-int				ft_putchar(char lett);
-int				ft_atoi(const char *str, int i, t_flag *flag);
-int				ft_str_c(const char *str, int i, t_flag *flag);
-int long long	ft_put_b(int long long nbr, char *base, long l_base, t_flag *flag);
+int	ft_printf(const char *str, ...);
+int	ft_putchar(char lett);
+int	ft_atoi(const char *str, int i, t_flag *flag);
+int	ft_str_c(const char *str, int i, t_flag *flag);
+int	ft_l(long nb, int base, t_flag *flag);
+int	ft_putnb_b(int long long nbr, char *base, long l_base, t_flag *flag);
 
 #endif

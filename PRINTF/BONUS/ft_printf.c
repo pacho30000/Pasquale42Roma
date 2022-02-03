@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:15:37 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/02/02 20:15:46 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/02/03 16:41:51 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_write(const char *str, int i, t_flag *flag, va_list par)
 
 	count = 0;
 	if (flag->type == 's' || flag->type == 'c')
-		count += ft_str_c(va_arg(par, char), 0, flag);
+		count += ft_str_c(va_arg(par, char *), 0, flag);
 	else if (flag->type == 'd' || flag->type == 'i')
 		count += ft_put_b(va_arg(par, int), "0123456789", 10, flag);
 	return (count);
@@ -67,7 +67,7 @@ int	ft_printf(const char *str, ...)
 		{
 			i++;
 			i += ft_check(str, i, &flag);
-			flag.space = str[i];
+			flag.type = str[i];
 			count += ft_write(str, i, &flag, par);
 		}
 	}

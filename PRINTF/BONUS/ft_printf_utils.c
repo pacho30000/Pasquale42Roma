@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:19:41 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/02/03 18:25:48 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/02/03 18:38:11 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	ft_putchar(char lett)
 /* - mette spazi vuoti dopo il print
 		| se n maggiore del count print
 		| È sempre seguito da numero
-		Funziona con - i, d, p, x, X, u
+		Funziona con - (i), (d), (p), (x), (X), (u)
 */
 /* 0 è un numero mette spazi vuoti prima del print
 		| se n maggiore del print

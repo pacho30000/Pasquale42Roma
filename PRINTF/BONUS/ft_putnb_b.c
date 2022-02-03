@@ -6,12 +6,12 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:34:42 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/02/03 18:32:23 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/02/03 18:37:51 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-int ft_chack_after(t_flag *flag, int count)
+int ft_check_after(t_flag *flag, int count)
 {
     int len;
     int ret;
@@ -38,9 +38,17 @@ int ft_chack_after(t_flag *flag, int count)
     return (ret);
 }
 
-int ft_chack_before(t_flag flag, int count)
+int ft_check_before(t_flag *flag, int count)
 {
-    
+    int len;
+
+    len = 0;
+    if (flag->less == 1 && !flag->num)
+    {
+        while (len < count && len < flag->num)
+            len += ft_putchar(' ');
+    }
+    return (len);
 }
 
 int	ft_putnb_b(int long long nbr, char *base, long l_base, t_flag *flag)
@@ -56,10 +64,10 @@ int	ft_putnb_b(int long long nbr, char *base, long l_base, t_flag *flag)
 	}
 	else if (nbr >= l_base)
 	{
-        count += ft_chack_after (flag, count);
+        count += ft_check_after (flag, count);
 		ft_putnb_b(nbr / l_base, base, l_base, flag);
 		ft_putchar(base[nbr % l_base]);
-        count += ft_chack_before(flag, count);
+        count += ft_check_before(flag, count);
 	}
 	else if (nbr >= 0)
 	{

@@ -6,18 +6,15 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/02 17:15:08 by pcatapan          #+#    #+#              #
-#    Updated: 2022/02/02 17:15:15 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/02/03 18:44:57 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-SRCS = 	ft_char.c		 \
-		ft_esadecimal.c  \
-		ft_putnumber.c 	 \
-		ft_unsigned.c	 \
-		ft_printf.c		 \
-		ft_printf_utils.c \
+SRCS =	ft_printf.c			\
+		ft_putnb_b.c		\
+		ft_printf_utils.c	\
 
 OBJS = ${SRCS:.c=.o}
 RM = rm -f

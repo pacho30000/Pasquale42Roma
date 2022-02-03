@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:15:37 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/02/03 16:41:51 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/02/03 18:45:34 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,17 @@ int	ft_write(const char *str, int i, t_flag *flag, va_list par)
 	if (flag->type == 's' || flag->type == 'c')
 		count += ft_str_c(va_arg(par, char *), 0, flag);
 	else if (flag->type == 'd' || flag->type == 'i')
-		count += ft_put_b(va_arg(par, int), "0123456789", 10, flag);
+		count += ft_putnb_b(va_arg(par, int), "0123456789", 10, flag);
+	else if (flag->type == 'x')
+		count += ft_putnb_b(va_arg(par, unsigned int), "0123456789abcdef", 16, flag);
+	else if (flag->type == 'X')
+		count += ft_putnb_b(va_arg(par, unsigned int), "0123456789ABCDEF", 16, flag);
+	else if (flag->type == 'p')
+		count += ft_putnb_b(va_arg(par, uintptr_t), "0123456789abcdef", 16, flag);
+	else if (flag->type == 'u')
+		count += ft_putnb_b(va_arg(par, unsigned int), "0123456789", 10, flag);
+	else if (flag->type == 'u')
+		count += ft_putchar('%');
 	return (count);
 }
 

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:19:41 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/02/04 05:08:15 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/02/04 20:30:53 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,13 @@ int	ft_str_c(const char *str, int i, t_flag *flag)
 	}
 	if (flag->dot == 1)
 	{
-		while (str[i++] != '\0' && i < flag->num)
-			count += ft_putchar(str[i]);
+		while (str[i] != '\0' && i < flag->num)
+			count += ft_putchar(str[i++]);
 	}
-	while (str[i++] != '\0')
-		count += ft_putchar(str[i]);
+	while (str[i] != '\0' && flag->dot == 0)
+		count += ft_putchar(str[i++]);
+	if (count == 0 && flag->num > 0)
+		count += ft_putchar(' ');
 	return (count);
 }
 
@@ -87,7 +89,6 @@ int	ft_atoi(const char *str, int i, t_flag *flag)
 	int	j;
 
 	j = 0;
-	flag->num = 0;
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
@@ -100,12 +101,16 @@ int	ft_atoi(const char *str, int i, t_flag *flag)
 	{
 		if (str[i] == '.')
 			flag->dot = 1;
-		else
+		else if (str[i] == ' ')
 			flag->space = 1;
 		i++;
 	}
+	if (!(str[i] >= '0' && str[i] <= '9'))
+		return (flag->space + flag->dot + flag->plus + flag->less);
+	if (str[i] == '0' && str[i + 1] >= '0' && str[i + 1] <= '9')
+		flag->zero += 1;
 	while (str[i] >= '0' && str[i] <= '9')
 		flag->num = flag->num * 10 + (str[i++] - '0');
-	j = flag->space + flag->less + flag->plus + flag->dot + ft_l(flag->num, 10, flag);
+	j = flag->space + flag->less + flag->plus + flag->dot + flag->zero + ft_l(flag->num, 10, flag);
 	return (j);
 }

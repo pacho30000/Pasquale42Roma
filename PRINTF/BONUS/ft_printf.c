@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:15:37 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/02/04 05:02:50 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/02/04 19:52:41 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,18 @@ int	ft_check(const char *str, int i, t_flag *flag)
 	flag->plus = 0;
 	flag->error = 0;
 	flag->less = 0;
+	flag->zero = 0;
+	flag->num = 0;
+	flag->less_par = 0;
 	i++;
 	if (str[i] == '.' || str[i] == '-' || str[i] == '+' || str[i] == ' '
-		|| (str[i] >= 0 && str[i] <= 9))
+		|| (str[i] >= '0' && str[i] <= '9'))
 		i += ft_atoi(str, i, flag);
 	else if (str[i] == '#')
+	{
 		flag->hastag = 1;
+		i++;
+	}
 	if ((str[i] >= 'a' && str[i] <= 'z') || str[i] == 'X' || str[i] == '%')
 		flag->type = str[i];
 	else

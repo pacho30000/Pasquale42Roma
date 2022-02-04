@@ -6,17 +6,22 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/02 17:15:08 by pcatapan          #+#    #+#              #
-#    Updated: 2022/02/03 18:44:57 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/02/04 04:46:38 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-SRCS =	ft_printf.c			\
-		ft_putnb_b.c		\
-		ft_printf_utils.c	\
+SRCS =	ft_printf.c		\
+		ft_putnb.c		\
+		ft_printf_utils.c\
+
+SRCS_B =	ft_printf.c		\
+			ft_putnb.c		\
+			ft_printf_utils.c\
 
 OBJS = ${SRCS:.c=.o}
+OBJS_B = ${SRCS_B:.c=.o}
 RM = rm -f
 FLAGS = -Wall -Wextra -Werror
 INCS = .
@@ -30,12 +35,15 @@ $(NAME) : ${OBJS}
 	
 all: $(NAME)
 
+bonus: $(NAME) $(OBJS_B)
+	${LIBC} $(NAME) $(OBJS_B)
+
 fclean:  clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(bonus)
 	
 clean:
-	$(RM) -f $(OBJS)
+	$(RM) -f $(OBJS) $(OBJS_B)
 	
 re: fclean all
 
-.PHONY: all clean fclean re .c.o
+.PHONY: all bonus clean fclean re .c.o

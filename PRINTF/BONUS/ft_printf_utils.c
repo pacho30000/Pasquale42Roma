@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:19:41 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/02/03 18:49:13 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/02/04 05:08:15 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int	ft_l(long nb, int base, t_flag *flag)
 	if (nb == 0)
 		i++;
 	if (nb < 0 && flag->type != 'u')
-	{
-		nb = nb * -1;
-		i++;
-	}
+		nb = nb * - 1;
 	if (nb < 0 && flag->type == 'u')
 		nb = 4294967296 - nb;
 	while (nb > 0)
@@ -39,21 +36,18 @@ int	ft_str_c(const char *str, int i, t_flag *flag)
 	int	count;
 
 	count = 0;
-	if (flag->type == 'c')
-		count += ft_putchar(str[i]);
-	else if (flag->type == 's')
+	if (!str)
 	{
-		if (flag->dot == 1)
-		{
-			while (str[i++] != '\0' && i < flag->num)
-				count += ft_putchar(str[i]);
-		}
-		else
-		{
-			while (str[i++] != '\0')
-				count += ft_putchar(str[i]);
-		}
+		write (1, "(null)", 6);
+		return (6);
 	}
+	if (flag->dot == 1)
+	{
+		while (str[i++] != '\0' && i < flag->num)
+			count += ft_putchar(str[i]);
+	}
+	while (str[i++] != '\0')
+		count += ft_putchar(str[i]);
 	return (count);
 }
 
@@ -112,6 +106,6 @@ int	ft_atoi(const char *str, int i, t_flag *flag)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 		flag->num = flag->num * 10 + (str[i++] - '0');
-	j = flag->space + flag->dot + flag->less + flag->plus + ft_l(flag->num, 10, flag);
+	j = flag->space + flag->less + flag->plus + flag->dot + ft_l(flag->num, 10, flag);
 	return (j);
 }

@@ -6,7 +6,7 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/02 17:15:08 by pcatapan          #+#    #+#              #
-#    Updated: 2022/02/04 04:46:38 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/02/09 02:32:46 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,12 @@ NAME = libftprintf.a
 SRCS =	ft_printf.c		\
 		ft_putnb.c		\
 		ft_printf_utils.c\
+		ft_put_p.c		\
 
 SRCS_B =	ft_printf.c		\
 			ft_putnb.c		\
 			ft_printf_utils.c\
+			ft_put_p.c		\
 
 OBJS = ${SRCS:.c=.o}
 OBJS_B = ${SRCS_B:.c=.o}

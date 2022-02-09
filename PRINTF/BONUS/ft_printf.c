@@ -6,32 +6,32 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:15:37 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/02/04 19:52:41 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/02/09 02:26:41 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_write(t_flag *flag, va_list par)
+int	ft_write(t_flag *f, va_list par)
 {
 	int	count;
 
 	count = 0;
-	if (flag->type == 's')
-		count += ft_str_c(va_arg(par, char *), 0, flag);
-	else if ( flag->type == 'c')
+	if (f->type == 's')
+		count += ft_str_c(va_arg(par, char *), 0, f);
+	else if (f->type == 'c')
 		count += ft_putchar(va_arg(par, int));
-	else if (flag->type == 'd' || flag->type == 'i')
-		count += ft_putnb(va_arg(par, int), "0123456789", 10, flag);
-	else if (flag->type == 'x')
-		count += ft_putnb(va_arg(par, unsigned int), "0123456789abcdef", 16, flag);
-	else if (flag->type == 'X')
-		count += ft_putnb(va_arg(par, unsigned int), "0123456789ABCDEF", 16, flag);
-	else if (flag->type == 'p')
-		count += ft_putnb(va_arg(par, uintptr_t), "0123456789abcdef", 16, flag);
-	else if (flag->type == 'u')
-		count += ft_putnb(va_arg(par, unsigned int), "0123456789", 10, flag);
-	else if (flag->type == '%')
+	else if (f->type == 'd' || f->type == 'i')
+		count += ft_putnb(va_arg(par, int), "0123456789", 10, f);
+	else if (f->type == 'x')
+		count += ft_putnb(va_arg(par, unsigned int), "0123456789abcdef", 16, f);
+	else if (f->type == 'X')
+		count += ft_putnb(va_arg(par, unsigned int), "0123456789ABCDEF", 16, f);
+	else if (f->type == 'p')
+		count += ft_putnb_p(va_arg(par, uintptr_t), "0123456789abcdef", 16, f);
+	else if (f->type == 'u')
+		count += ft_putnb(va_arg(par, unsigned int), "0123456789", 10, f);
+	else if (f->type == '%')
 		count += ft_putchar('%');
 	return (count);
 }
@@ -42,7 +42,6 @@ int	ft_check(const char *str, int i, t_flag *flag)
 	flag->hastag = 0;
 	flag->space = 0;
 	flag->plus = 0;
-	flag->error = 0;
 	flag->less = 0;
 	flag->zero = 0;
 	flag->num = 0;
@@ -58,12 +57,6 @@ int	ft_check(const char *str, int i, t_flag *flag)
 	}
 	if ((str[i] >= 'a' && str[i] <= 'z') || str[i] == 'X' || str[i] == '%')
 		flag->type = str[i];
-	else
-	{
-		write (1, "Errore : Flag non riconosciuta!", 31);
-		flag->error = 1;
-		return (31);
-	}
 	return (i);
 }
 
@@ -87,8 +80,6 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			i = ft_check(str, i, &flag);
-			if (flag.error == 1)
-				return (31 + count);
 			count += ft_write(&flag, par);
 			i++;
 		}

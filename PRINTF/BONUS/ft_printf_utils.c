@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:19:41 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/02/09 02:47:40 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/02/10 16:04:41 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_l(long nb, int base, t_flag *flag)
 	return (i);
 }
 
-int	ft_str_c(const char *str, int i, t_flag *flag)
+int	ft_str(const char *str, int i, t_flag *flag)
 {
 	int	count;
 	int	len;
@@ -55,9 +55,9 @@ int	ft_str_c(const char *str, int i, t_flag *flag)
 		if (count == 0 && flag->num > 0)
 			count += ft_putchar(' ');
 	}
-	while (len < (flag->num - count))
+	while (len < (flag->num - count) && flag->less == 1)
 			len += ft_putchar(' ');
-	return (count);
+	return (count + len);
 }
 
 int	ft_putchar(char lett)
@@ -125,6 +125,7 @@ int	ft_atoi(const char *str, int i, t_flag *f)
 		f->zero += 1;
 	while (str[i] >= '0' && str[i] <= '9')
 		f->num = f->num * 10 + (str[i++] - '0');
+	ft_check_atoi(str, i, f);
 	j = f->space + f->less + f->plus + f->dot + f->zero + ft_l(f->num, 10, f);
 	return (j);
 }

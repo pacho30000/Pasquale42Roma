@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 13:31:31 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/02/09 02:42:41 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/02/09 18:53:16 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int main()
 	//printf("\n%d", printf(" %-2c ", '0'));
 	//printf("\n\n");
 	//printf("%.2s" , "aaa");
-	ft_printf("\n%d", ft_printf(" %-2c ", '0'));
+	ft_printf("\n%d", ft_printf(" %-2s ", "0"));
 	return (0);
 }

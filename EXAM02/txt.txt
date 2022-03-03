@@ -1,0 +1,3 @@
+tringa 1
+stringa 2
+stringa 3

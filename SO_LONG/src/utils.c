@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 19:21:07 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/22 20:25:20 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/15 18:42:19 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../so_long.h"
 
 size_t	ft_strlen(char *s)
 {
@@ -66,4 +66,15 @@ char	*ft_strjoin(char *s1, char *s2)
 	str[c] = '\0';
 	free(s1);
 	return (str);
+}
+
+size_t	find_newline(char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\n')
+		i++;
+	i++;
+	return (i);
 }

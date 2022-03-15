@@ -6,57 +6,81 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 23:52:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/10 06:47:24 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/15 21:54:54 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-char	*ft_width_matrix(int fd, t_map *map)
+char	*ft_get_next_line(int fd)
 {
+	int		result;
 	char	*save;
-	char	*line;
+	char	*max_line;
 
-	line = (char *)malloc(sizeof(char) * 1);
-	save = (char *)malloc(sizeof(char) * 1);
-	if (!save || !line)
+	result = 1;
+	save = (char *)malloc((sizeof(char)) * 1);
+	max_line = (char *)malloc(sizeof(char) * 1);
+	if (!save || !max_line)
 		return (NULL);
-	line[0] = '\0';
-	save[0] = '\0';
-	while (!ft_strchr(line, '\n') && map->read != 0)
+	max_line[0] = '\0';
+	while (result != 0)
 	{
-		map->read = read (fd, save, map->w);
-		if (map->read == -1)
+		result = read(fd, save, 1);
+		if (result == -1)
 		{
-			//free(save);
-			//free(line);
+			free(save);
+			free(max_line);
 			return (NULL);
 		}
-		save[map->read++] = '\0';
-		line = ft_strjoin(line, save);
+		save[result] = '\0';
+		max_line = ft_strjoin(max_line, save);
 	}
-	//free(save);
-	map->w = ft_strlen(line);
-	return (*(&line));
+	free(save);
+	return (max_line);
 }
 
-int	ft_hight_matrix(int fd, t_map *map)
+int	ft_hight_matrix(t_map *map, char *line)
 {
-	char	*line;
+	int	i;
 
-	map->h = 1;
-	while (map->read != 0)
+	i = 0;
+	while (line[i] != '\0')
 	{
-		line = ft_width_matrix(fd, map);
-		if (line[map->w - 1] == '\n' && line[map->w] == '\0')
+		if (line[i] == '\n')
+		{
 			map->h++;
-		else
-			return (0);
+			i++;
+			if (i != map->h * map->w)
+			{
+				ft_printf("\x1b[31m%s\n", "The map is not rettangular.");
+				return (0);
+			}
+		}
+		i++;
 	}
 	return (1);
 }
 
-int	ft_checker_map(const char *file, t_map *map)
+int	ft_width_matrix(int file, t_map *map)
+{
+	int		i;
+
+	i = 0;
+	map->max_line = ft_get_next_line(file);
+	if (map->max_line == NULL || map->max_line[0] == '\n')
+		return (1);
+	map->w = find_newline(map->max_line);
+	if (ft_hight_matrix(map, map->max_line) == 0)
+	{
+		ft_printf("\x1b[31m%s\n", "Error with ft_hight_matrix!");
+		free(map->max_line);
+		return (0);
+	}
+	return (1);
+}
+
+int	ft_checker_map(const char *file, t_map *map, t_control_obj *obj)
 {
 	int		fd;
 
@@ -64,43 +88,19 @@ int	ft_checker_map(const char *file, t_map *map)
 	if (fd == -1)
 	{
 		ft_printf("\x1b[31m%s\n", "Error when open the map!");
+		close (fd);
 		return (0);
 	}
-	if (ft_width_matrix(fd, map) == NULL)
+	if (ft_width_matrix(fd, map) == 0)
 	{
-		ft_printf("\x1b[31m%s\n", "Error with ft_width_matrix!");
+		close (fd);
 		return (0);
 	}
-	map->read = 1;
-	if (ft_hight_matrix(fd, map) == 0)
+	if (ft_contenet_map(map, obj) == 0)
 	{
-		ft_printf("\x1b[31m%s\n", "Error with ft_hight_matrix!");
+		close (fd);
 		return (0);
 	}
-	return (1);
-}
-
-int	ft_checker(int argc, char **argv, t_map *map)
-{
-	int	i;
-
-	i = 0;
-	if (argc < 2)
-	{
-		ft_printf("\x1b[31m%s\n", "Invalid number of arguments!");
-		return (0);
-	}
-	while (argv[1][i] != '.')
-		i++;
-	if (!(argv[1][i + 1] == 'b' && argv[1][i + 2] == 'e'
-			&& argv[1][i + 3] == 'r'))
-	{
-		ft_printf("\x1b[31m%s\n", "Invalid exstension map!");
-		return (0);
-	}
-	if (ft_checker_map(argv[1], map) == 0)
-		return (0);
-	ft_printf ("/n La matrice é larga : %n", map->w);
-	ft_printf ("/n La matrice é alta : %n", map->h);
+	close (fd);
 	return (1);
 }

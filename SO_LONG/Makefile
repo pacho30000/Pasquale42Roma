@@ -5,18 +5,23 @@
 #                                                     +:+ +:+         +:+      #
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/03/11 06:22:28 by aperrone          #+#    #+#              #
-#    Updated: 2022/03/18 07:21:25 by pcatapan         ###   ########.fr        #
+#    Created: 2022/03/18 07:28:35 by pcatapan          #+#    #+#              #
+#    Updated: 2022/03/18 07:31:48 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
-HDRS = so_long.h ./PRINTF/*.h
+
 SRCS = ./src/*.c ./PRINTF/*.c ./src/move_element/*.c ./src/fix_element/*.c
+
 OBJS = $(SRCS:.c=.o)
+
 CC = gcc
+
 FLAGS = -Wall -Wextra -Werror
+
 KIT = -l mlx -framework openGL -framework AppKit
+
 
 $(NAME) :
 	$(CC) -g $(HDRS) $(SRCS) $(KIT)
@@ -25,7 +30,7 @@ clean:
 	rm -f $(OBJS)
 
 fclean:	clean
-	rm -f $(NAME)
+	rm -rf $(NAME) a.*
 
 norm:
-	norminette -R ./srcs/getnextline ./srcs/srcs
+	norminette -R ./src ./PRINTF

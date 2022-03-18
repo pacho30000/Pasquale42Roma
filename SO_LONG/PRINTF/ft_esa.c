@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putesa.c                                        :+:      :+:    :+:   */
+/*   ft_esa.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/29 13:58:03 by aanghel           #+#    #+#             */
-/*   Updated: 2022/02/07 23:47:17 by aanghel          ###   ########.fr       */
+/*   Created: 2022/01/29 13:57:14 by aanghel           #+#    #+#             */
+/*   Updated: 2022/02/07 23:49:08 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	ft_digitesa(uintptr_t nb, char *base)
+static void	ft_digitupper(unsigned int nb, char *base)
 {
-	if (nb < 0)
+	if (nb >= 16)
 	{
-		ft_char('-');
-		ft_digitesa(-nb, base);
-	}
-	else if (nb >= 16)
-	{
-		ft_digitesa(nb / 16, base);
+		ft_digitupper(nb / 16, base);
 		ft_char(base[nb % 16]);
 	}
 	else if (nb >= 0)
@@ -30,30 +25,34 @@ static void	ft_digitesa(uintptr_t nb, char *base)
 	}
 }
 
-int	ft_lenesa(uintptr_t nb)
+static void	ft_digitlower(unsigned int nb, char *base)
 {
-	int	i;
-
-	i = 0;
-	if (nb == 0)
-		return (1);
-	while (nb > 0)
+	if (nb >= 16)
 	{
-		nb = nb / 16;
-		i++;
+		ft_digitlower(nb / 16, base);
+		ft_char(base[nb % 16]);
 	}
-	return (i);
+	else if (nb >= 0)
+	{
+		ft_char(base[nb % 16]);
+	}
 }
 
-int	ft_putesa(uintptr_t num)
+unsigned int	ft_esa(unsigned int num, char lett)
 {
 	int		count;
 	char	*base;
 
-	write(1, "0x", 2);
-	count = 2;
-	count += ft_lenesa(num);
-	base = "0123456789abcdef";
-	ft_digitesa(num, base);
+	count = ft_lenesa(num);
+	if (lett == 'X')
+	{
+		base = "0123456789ABCDEF";
+		ft_digitupper(num, base);
+	}
+	else
+	{
+		base = "0123456789abcdef";
+		ft_digitlower(num, base);
+	}
 	return (count);
 }

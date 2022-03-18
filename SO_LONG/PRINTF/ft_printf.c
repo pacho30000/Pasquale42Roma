@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/27 16:18:14 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/28 09:04:50 by pcatapan         ###   ########.fr       */
+/*   Created: 2022/02/07 13:32:10 by aanghel           #+#    #+#             */
+/*   Updated: 2022/02/07 23:41:11 by aanghel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,34 @@ int	ft_write(char *str)
 	i = 0;
 	if (!str)
 	{
-		write (1, "(null)", 6);
+		write(1, "(null)", 6);
 		return (6);
-	}	
-	while (str[i] != '\0')
-	{
-		write (1, &str[i], 1);
-		i++;
 	}
+	while (str[i] != '\0')
+		write(1, &str[i++], 1);
 	return (i);
+}
+
+int	ft_format(va_list var, const char str)
+{
+	int	count;
+
+	count = 0;
+	if (str == 's')
+		count += ft_write(va_arg(var, char *));
+	else if (str == 'c')
+		count += ft_char(va_arg(var, int));
+	else if (str == 'p')
+		count += ft_putesa(va_arg(var, uintptr_t));
+	else if (str == 'd' || str == 'i')
+		count += ft_putnbr(va_arg(var, int));
+	else if (str == 'u')
+		count += ft_u(va_arg(var, unsigned int));
+	else if (str == 'x' || str == 'X')
+		count += ft_esa(va_arg(var, unsigned int), str);
+	else if (str == '%')
+		count += write(1, "%%", 1);
+	return (count);
 }
 
 int	ft_printf(const char *str, ...)
@@ -38,50 +57,18 @@ int	ft_printf(const char *str, ...)
 
 	i = 0;
 	count = 0;
-	va_start(var, str);	
-	while(str[i] != '%')
-		count += ft_char(str[i++]);
-	while (str[i] != '%')
-		i++;
-	while (str[i] != '\0')
+	va_start(var, str);
+	while (str[i])
 	{
-		if (str[i] == 's')
-			count += ft_write(va_arg(var, char *));
-		else if (str[i] == 'c')
-			count += ft_char(va_arg(var, int));
-		else if (str[i] == 'p')
-			count += ft_putesa(va_arg(var, uintptr_t));
-		else if (str[i] == 'd' || str[i] == 'i')
-			count += ft_putnumber(va_arg(var,int));
-		else if (str[i] == 'u')
-			count += ft_unsigned(va_arg(var,unsigned int));
-		else if (str[i] == 'x' || str[i] == 'X')
-			count += ft_esadecimal(va_arg(var, unsigned int), str[i]);
-		else if (str[i] == '%' && str[i + 1] == '%')
+		if (str[i] == '%')
 		{
-			write(1, "%%", 1);
-			count++;
+			count += ft_format(var, str[i + 1]);
 			i++;
 		}
-		else if (str[i] != '%')
-		{
-			write (1, &str[i], 1);
-			count++;
-		}
+		else
+			count += ft_char(str[i]);
 		i++;
 	}
 	va_end(var);
 	return (count);
 }
-
-
-// int main()
-// {
-// 	int ret;
- 	
-//  	ret = 5;
-//   	ft_printf("%d",ft_printf(" %% "));
-//   	//printf("\n\n");
-//   	printf("%d", printf(" %% "));
-//  }
-

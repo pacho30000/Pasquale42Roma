@@ -3,42 +3,29 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+         #
+#    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/01/29 14:37:59 by aanghel           #+#    #+#              #
-#    Updated: 2022/02/07 23:50:31 by aanghel          ###   ########.fr        #
+#    Created: 2022/03/11 06:22:28 by aperrone          #+#    #+#              #
+#    Updated: 2022/03/18 07:21:25 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
-
-SRCS =	ft_printf.c \
-		ft_u.c \
-		ft_esa.c \
-		ft_putnbr.c \
-		ft_putesa.c \
-		ft_char.c \
-
-OBJS = ${SRCS:.c=.o}
-RM = rm -f
+NAME = so_long
+HDRS = so_long.h ./PRINTF/*.h
+SRCS = ./src/*.c ./PRINTF/*.c ./src/move_element/*.c ./src/fix_element/*.c
+OBJS = $(SRCS:.c=.o)
+CC = gcc
 FLAGS = -Wall -Wextra -Werror
-INCS = .
-LIBC = ar -rcs
+KIT = -l mlx -framework openGL -framework AppKit
 
-.c.o :
-	${CC} ${FLAGS} -c $< -o ${<:.c=.o} -I${INCS}
-	
-$(NAME) : ${OBJS}
-	${LIBC} ${NAME} ${OBJS}
-	
-all: $(NAME)
+$(NAME) :
+	$(CC) -g $(HDRS) $(SRCS) $(KIT)
 
-fclean:  clean
-	$(RM) $(NAME)
-	
 clean:
-	$(RM) -f $(OBJS)
-	
-re: fclean all
+	rm -f $(OBJS)
 
-.PHONY: all clean fclean re .c.o
+fclean:	clean
+	rm -f $(NAME)
+
+norm:
+	norminette -R ./srcs/getnextline ./srcs/srcs

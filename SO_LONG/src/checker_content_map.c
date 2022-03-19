@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_content_map.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 21:53:16 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/17 02:10:10 by aanghel          ###   ########.fr       */
+/*   Updated: 2022/03/19 02:00:26 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	ft_check_lateral_walls(t_map *map, int i, int k)
 	int	j;
 
 	j = 2;
-	while (j <= map->h)
+	while (j < map->h)
 	{
-		if (map->max_line[map->w * j - 2] != '1')
+		if (map->max_line[map->w * j] != '1')
 		{
 			ft_printf("\x1b[31m%s\n", "The last colum isn't all walls!");
 			return (0);
@@ -54,7 +54,8 @@ int	ft_check_maps_walls(t_map *map)
 		}
 		i++;
 	}
-	k = map->w * map->h - 2;
+	k = map->w * map->h;
+	k = k - 2;
 	while (map->max_line[k] != '\n')
 	{
 		if (map->max_line[k] != '1')

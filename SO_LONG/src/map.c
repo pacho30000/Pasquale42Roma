@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:01:58 by aanghel           #+#    #+#             */
-/*   Updated: 2022/03/18 05:19:33 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/19 07:28:03 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@ void	ft_fill_matrix(t_map *map)
 	while (x < map->h)
 	{
 		y = 0;
-		while (y < map->w)
+		while (y <= map->w)
 		{
-			map->map[x][y] = map->max_line[s];
+			if (map->max_line[s] != '\n')
+				map->map[x][y] = map->max_line[s];
+			else
+				map->map[x][y] = '\0';
 			s++;
 			y++;
 		}
@@ -44,11 +47,13 @@ void	ft_print_map_in_shell(t_map *map)
 	while (i < map->h)
 	{
 		j = 0;
-		while (j < map->w)
+		while (map->map[i][j] != '\0')
 		{
 			ft_printf("%c", map->map[i][j]);
 			j++;
 		}
+		if (map->map[i][j] == '\0')
+			ft_printf("\n");
 		i++;
 	}
 }
@@ -58,10 +63,11 @@ void	ft_creating_map(t_map *map)
 	int	i;
 
 	i = 0;
-	map->map = (char **)malloc(sizeof(char) * map->h * map->w);
+	map->w = map->w - 1;
+	map->map = malloc(map->h * sizeof(char *));
 	if (!map->map)
 		return ;
-	while (i <= map->h)
+	while (i < map->h)
 	{
 		map->map[i] = (char *)malloc(sizeof(char) * map->w);
 		if (!map->map[i])
@@ -74,7 +80,8 @@ void	ft_creating_map(t_map *map)
 	ft_fill_matrix(map);
 	ft_print_map_in_shell(map);
 	map->mlx_ptr = mlx_init();
-	map->window = mlx_new_window(map->mlx_ptr, (map->w - 1) * SIZE, \
+	map->window = mlx_new_window(map->mlx_ptr, map->w * SIZE, \
 					map->h * SIZE, "42 PacMan by Pcatapan");
 	ft_img(map);
+	return ;
 }

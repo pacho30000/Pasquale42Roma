@@ -6,13 +6,13 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/18 07:28:35 by pcatapan          #+#    #+#              #
-#    Updated: 2022/03/18 07:31:48 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/03/19 03:54:55 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-SRCS = ./src/*.c ./PRINTF/*.c ./src/move_element/*.c ./src/fix_element/*.c
+SRCS = ./src/*.c ./PRINTF/*.c ./src/move_element/*.c
 
 OBJS = $(SRCS:.c=.o)
 

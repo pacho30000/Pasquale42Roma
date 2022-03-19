@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 19:59:37 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/18 06:24:59 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/19 07:29:19 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	main(int argc, char **argv)
 	if (ft_checker(argc, argv, &map) == 0)
 		return (0);
 	ft_creating_map(&map);
+	ft_move(&map);
 	mlx_loop(map.mlx_ptr);
+	exit (0);
 	return (0);
 }

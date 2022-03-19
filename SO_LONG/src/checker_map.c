@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 23:52:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/18 00:04:54 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/19 01:37:41 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int	ft_checker_map(const char *file, t_map *map, t_control_obj *obj)
 		return (0);
 	}
 	close (fd);
+	//map->w = map->w - 2;
 	if (ft_content_map(map, obj) == 0 || ft_count_element(map, obj) == 0
 		|| ft_check_maps_walls(map) == 0)
 	{

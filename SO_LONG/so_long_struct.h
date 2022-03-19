@@ -6,23 +6,17 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 04:08:45 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/18 07:06:44 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/19 06:58:29 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_STRUCT_H
 # define  SO_LONG_STRUCT_H
 
-# define W_VERTICAL "/Users/pcatapan/Desktop/42/SO_LONG/asset/w_vertical.xpm"
-# define W_HORIZONTAL "/Users/pcatapan/Desktop/42/SO_LONG/asset/w_horizona.xpm"
-# define W_CR_SX "/Users/pcatapan/Desktop/42/SO_LONG/asset/wall_corner_sx.xpm"
-# define W_CR_DX "/Users/pcatapan/Desktop/42/SO_LONG/asset/wall_corner_dx.xpm"
-# define W_CR_UP "/Users/pcatapan/Desktop/42/SO_LONG/asset/wall_corner_up.xpm"
-# define W_CR_DW "/Users/pcatapan/Desktop/42/SO_LONG/asset/wall_corner_dw.xpm"
-# define W_C_C_SX_UP "/Users/pcatapan/Desktop/42/SO_LONG/asset/w_cr_c_sx_up.xpm"
-# define W_C_C_DX_UP "/Users/pcatapan/Desktop/42/SO_LONG/asset/w_cr_c_dx_up.xpm"
-# define W_C_C_SX_DW "/Users/pcatapan/Desktop/42/SO_LONG/asset/w_cr_c_sx_dw.xpm"
-# define W_C_C_DX_DW "/Users/pcatapan/Desktop/42/SO_LONG/asset/w_cr_c_dx_dw.xpm"
+# define WALL "/Users/pcatapan/Desktop/42/SO_LONG/asset/wall.xpm"
+# define BACK_G "/Users/pcatapan/Desktop/42/SO_LONG/asset/beckg.xpm"
+# define COLLECT "/Users/pcatapan/Desktop/42/SO_LONG/asset/collect.xpm"
+# define EXIT "/Users/pcatapan/Desktop/42/SO_LONG/asset/exit.xpm"
 # define BLU_DW_1 "/Users/pcatapan/Desktop/42/SO_LONG/asset/blu_dw_1.xpm"
 # define BLU_DW_2 "/Users/pcatapan/Desktop/42/SO_LONG/asset/blu_dw_2.xpm"
 # define BLU_UP_1 "/Users/pcatapan/Desktop/42/SO_LONG/asset/blu_up_1.xpm"
@@ -64,22 +58,16 @@
 # define PAC_O_DX "/Users/pcatapan/Desktop/42/SO_LONG/asset/pacman_open_dx.xpm"
 # define PAC_O_SX "/Users/pcatapan/Desktop/42/SO_LONG/asset/pacman_open_sx.xpm"
 # define PAC_O_UP "/Users/pcatapan/Desktop/42/SO_LONG/asset/pacman_open_up.xpm"
-# define COLLEZIONABILE "/Users/pcatapan/Desktop/42/SO_LONG/asset/coll.xpm"
+# define ZERO "/Users/pcatapan/Desktop/42/SO_LONG/asset/point.xpm"
 
 typedef struct s_img
 {
 	int		w;
 	int		h;
-	void	*wall_vertical;
-	void	*wall_horizontal;
-	void	*wall_corner_sx;
-	void	*wall_corner_dx;
-	void	*wall_corner_up;
-	void	*wall_corner_dw;
-	void	*wall_corner_c_sx_up;
-	void	*wall_corner_c_dx_up;
-	void	*wall_corner_c_sx_dw;
-	void	*wall_corner_c_dx_dw;
+	void	*back_g;
+	void	*wall;
+	void	*zero;
+	void	*exit;
 	void	*blu_dw_1;
 	void	*blu_dw_2;
 	void	*blu_up_1;

@@ -6,11 +6,24 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 06:38:52 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/20 05:47:14 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/20 09:13:23 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+int	ft_animate(t_map *map)
+{
+	static int	i;
+
+	i = 0;
+	ft_animate_fix_red(map, i);
+	i = 0;
+	// ft_animate_fix_orange;
+	// ft_animate_fix_blu;
+	// ft_animate_fix_pink;
+	return (0);
+}
 
 /*
 Freccia UP(126) -- Freccia DW(125); 
@@ -29,6 +42,7 @@ int	ft_controll_key(int key, t_map *map)
 		ft_pacman_dx(map);
 	if (key == 123 || key == 0)
 		ft_pacman_sx(map);
+	ft_animate(map);
 	// if (key == 53)
 	// 	ft_quit;
 	// if (key == 36 || key == 49)
@@ -38,5 +52,10 @@ int	ft_controll_key(int key, t_map *map)
 
 void	ft_move(t_map *map)
 {
+	map->map[map->red.x][map->red.y] = 0;
+	map->map[map->orange.x][map->orange.y] = 0;
+	map->map[map->blu.x][map->blu.y] = 0;
+	map->map[map->pink.x][map->pink.y] = 0;
 	mlx_hook(map->window, 2, 1L << 0, &ft_controll_key, map);
+	//mlx_loop_hook(map->mlx_ptr, ft_animate, map);
 }

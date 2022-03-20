@@ -6,11 +6,43 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 03:20:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/18 07:13:39 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/20 09:17:36 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../so_long.h"
+
+void	ft_animate_fix_red(t_map *map, int i)
+{
+	static int	g;
+
+	g = 1;
+	while (i < (2000001 * 100))
+	{
+		if (i == (200000 / 4) && g == 1)
+		{
+			g = 0;
+			mlx_put_image_to_window(map->mlx_ptr, map->window, \
+				map->img->back_g, map->red.y * SIZE, map->red.x * SIZE);
+			mlx_put_image_to_window(map->mlx_ptr, map->window, \
+				map->img->red_dw_2, map->red.y * SIZE, map->red.x * SIZE);
+			mlx_put_image_to_window(map->mlx_ptr, map->window, \
+				map->img->back_g, map->red.y * SIZE, map->red.x * SIZE);
+		}
+		else if (i == (200000 * 100) && g == 0)
+		{
+			g = 1;
+			mlx_put_image_to_window(map->mlx_ptr, map->window, \
+				map->img->back_g, map->red.y * SIZE, map->red.x * SIZE);
+			mlx_put_image_to_window(map->mlx_ptr, map->window, \
+				map->img->red_dw_1, map->red.y * SIZE, map->red.x * SIZE);
+			mlx_put_image_to_window(map->mlx_ptr, map->window, \
+				map->img->back_g, map->red.y * SIZE, map->red.x * SIZE);
+		}
+		i++;
+	}
+	i = 0;
+}
 
 void	ft_fill_to_img_red(t_img *img, void *mlx_ptr)
 {

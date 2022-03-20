@@ -6,53 +6,88 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 00:32:18 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/20 05:32:59 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/20 06:43:15 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	ft_put_img_norma(t_map *map, t_img *img, int x, int y)
+int	ft_put_img_enemy(t_map *map, int temp, int x, int y)
+{
+	if (temp == 4)
+	{
+		mlx_put_image_to_window(map->mlx_ptr, map->window, \
+								map->img->pink_dw_1, y * SIZE, x * SIZE);
+		map->pink.x = x;
+		map->pink.y = y;
+	}
+	if (temp == 3)
+	{
+		mlx_put_image_to_window(map->mlx_ptr, map->window, \
+								map->img->orange_dw_1, y * SIZE, x * SIZE);
+		map->orange.x = x;
+		map->orange.y = y;
+	}
+	if (temp == 2)
+	{
+		mlx_put_image_to_window(map->mlx_ptr, map->window, \
+								map->img->blu_dw_1, y * SIZE, x * SIZE);
+		map->blu.x = x;
+		map->blu.y = y;
+	}
+	temp--;
+	return (temp);
+}
+
+void	ft_put_img_norma(t_map *map, int x, int y)
 {
 	if (map->map[x][y] == 'C')
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-								img->collezionabile, y * SIZE, x * SIZE);
+								map->img->collezionabile, y * SIZE, x * SIZE);
 	if (map->map[x][y] == 'E')
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-								img->exit, y * SIZE, x * SIZE);
+								map->img->exit, y * SIZE, x * SIZE);
 	if (map->map[x][y] == '0')
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-									img->zero, y * SIZE, x * SIZE);
-	if (map->map[x][y] == 'N')
+									map->img->zero, y * SIZE, x * SIZE);
+	if (map->map[x][y] == '1')
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-								img->red_dw_1, y * SIZE, x * SIZE);
+										map->img->wall, y * SIZE, x * SIZE);
+	if (map->map[x][y] == 'P')
+	{
+		mlx_put_image_to_window(map->mlx_ptr, map->window, \
+								map->img->pacman_open_sx, y * SIZE, x * SIZE);
+		map->pacman.x = x;
+		map->pacman.y = y;
+	}
 }
 
 void	ft_put_img(t_map *map, t_img *img)
 {
 	int	x;
 	int	y;
+	int	temp;
 
-	x = 0;
-	while (x < map->h)
+	x = -1;
+	temp = map->object->enemy;
+	while (++x < map->h)
 	{
-		y = 0;
-		while (y < map->w)
+		y = -1;
+		while (y++ < map->w)
 		{
-			if (map->map[x][y] == '1')
-				mlx_put_image_to_window(map->mlx_ptr, map->window, \
-										img->wall, y * SIZE, x * SIZE);
-			if (map->map[x][y] == 'P')
+			if (map->map[x][y] == 'N')
 			{
-				mlx_put_image_to_window(map->mlx_ptr, map->window, \
-									img->pacman_open_sx, y * SIZE, x * SIZE);
-				map->pacman.x = x;
-				map->pacman.y = y;
+				if (temp == 1)
+				{
+					mlx_put_image_to_window(map->mlx_ptr, map->window, \
+										map->img->red_dw_1, y * SIZE, x * SIZE);
+					map->red.x = x;
+					map->red.y = y;
+				}
+				temp = ft_put_img_enemy(map, temp, x, y);
 			}
-			ft_put_img_norma(map, img, x, y);
-			y++;
+			ft_put_img_norma(map, x, y);
 		}
-		x++;
 	}
 }
 

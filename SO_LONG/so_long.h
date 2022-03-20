@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 19:54:09 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/20 05:31:38 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/20 08:12:29 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_map
 	t_sprite		orange;
 	t_sprite		blu;
 	t_img			*img;
-	t_control_obj	object;
+	t_control_obj	*object;
 }	t_map;
 
 size_t	ft_strlen(char *s);
@@ -68,9 +68,13 @@ int		ft_can_move(char c);
 void	ft_creating_map(t_map *map);
 void	ft_img(t_map *map);
 void	ft_fill_to_img_red(t_img *img, void *mlx_ptr);
+void	ft_animate_fix_red(t_map *map, int i);
 void	ft_fill_to_img_orange(t_img *img, void *mlx_ptr);
+void	ft_animate_fix_orange(t_map *map, int dir);
 void	ft_fill_to_img_pink(t_img *img, void *mlx_ptr);
+void	ft_animate_fix_pink(t_map *map, int dir);
 void	ft_fill_to_img_blu(t_img *img, void *mlx_ptr);
+void	ft_animate_fix_blu(t_map *map, int dir);
 void	ft_fill_to_img_pacman(t_img *img, void *mlx_ptr);
 void	ft_chang_img_direction(t_map *map, int y, int x, void *img);
 void	ft_move(t_map *map);

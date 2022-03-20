@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 21:53:16 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/19 02:00:26 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/20 05:31:23 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,22 @@ int	ft_count_element(t_map *map, t_control_obj *obj)
 {
 	if (obj->player != 1)
 	{
-		ft_printf("\x1b[31m%s\n", "Too many players!");
+		ft_printf("\x1b[31m%s\n", "Problem with palyer!");
 		return (0);
 	}
-	if (obj->coin != 1)
+	if (obj->coin == 0)
 	{
-		ft_printf("\x1b[31m%s\n", "Too many collectible!");
+		ft_printf("\x1b[31m%s\n", "The min coin is one!");
 		return (0);
 	}
-	if (obj->exit != 1)
+	if (obj->enemy > 4)
 	{
-		ft_printf("\x1b[31m%s\n", "Too many exit!");
+		ft_printf (RED"%s", "Sorry bro this game have max 4 enemy!");
+		return (0);
+	}
+	if (obj->exit == 0)
+	{
+		ft_printf("\x1b[31m%s\n", "The min of exit is one!");
 		return (0);
 	}
 	return (1);
@@ -95,7 +100,8 @@ int	ft_content_map(t_map *map, t_control_obj *obj)
 	obj->player = 0;
 	obj->coin = 0;
 	obj->exit = 0;
-	while (map->max_line[i] != '\0')
+	obj->enemy = 0;
+	while (map->max_line[++i] != '\0')
 	{
 		if (map->max_line[i] == 'P')
 			obj->player++;
@@ -103,13 +109,14 @@ int	ft_content_map(t_map *map, t_control_obj *obj)
 			obj->exit++;
 		else if (map->max_line[i] == 'C')
 			obj->coin++;
+		else if (map->max_line[i] == 'N')
+			obj->enemy++;
 		else if (!(map->max_line[i] == '1' || map->max_line[i] == '0'
 				|| map->max_line[i] == '\n'))
 		{
 			ft_printf("\x1b[31m%s\n", "Error find a charter not permised!");
 			return (0);
 		}
-		i++;
 	}
 	return (1);
 }

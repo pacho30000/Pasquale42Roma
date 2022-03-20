@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 19:54:09 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/19 09:31:36 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/20 05:31:38 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ typedef struct s_sprite
 
 typedef struct s_control_obj
 {
-	int		player;
-	int		exit;
-	int		coin;
+	int	player;
+	int	exit;
+	int	coin;
+	int	enemy;
 }	t_control_obj;
 
 typedef struct s_map
@@ -63,6 +64,7 @@ int		ft_checker_map(const char *file, t_map *map, t_control_obj *obj);
 int		ft_content_map(t_map *map, t_control_obj *obj);
 int		ft_count_element(t_map *map, t_control_obj *obj);
 int		ft_move_pacman(int key, t_map *map);
+int		ft_can_move(char c);
 void	ft_creating_map(t_map *map);
 void	ft_img(t_map *map);
 void	ft_fill_to_img_red(t_img *img, void *mlx_ptr);

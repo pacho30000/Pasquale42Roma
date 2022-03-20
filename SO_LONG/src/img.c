@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 00:32:18 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/19 07:56:31 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/20 05:32:59 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	ft_put_img_norma(t_map *map, t_img *img, int x, int y)
 	if (map->map[x][y] == '0')
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
 									img->zero, y * SIZE, x * SIZE);
+	if (map->map[x][y] == 'N')
+		mlx_put_image_to_window(map->mlx_ptr, map->window, \
+								img->red_dw_1, y * SIZE, x * SIZE);
 }
 
 void	ft_put_img(t_map *map, t_img *img)

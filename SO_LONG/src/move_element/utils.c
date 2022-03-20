@@ -6,16 +6,32 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 08:12:07 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/19 09:33:39 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/20 05:18:54 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../so_long.h"
 
-void	ft_chang_img_direction(t_map *map, int x, int y, void *img)
+int	ft_can_move(char c)
 {
-	mlx_put_image_to_window(map->mlx_ptr, map->window, \
-							map->img->back_g, y * SIZE, x * SIZE);
-	mlx_put_image_to_window(map->mlx_ptr, map->window, img, y * SIZE, \
-								x * SIZE);
+	int		i;
+	char	*elm;
+
+	i = 0;
+	elm = (char *)malloc(sizeof(char) * 3 + 1);
+	elm[0] = '1';
+	elm[1] = 'N';
+	elm[2] = 'E';
+	elm[3] = '\0';
+	while (elm[i] != '\0')
+	{
+		if (elm[i] == c)
+		{
+			free(elm);
+			return (0);
+		}
+		i++;
+	}
+	free(elm);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 06:38:52 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/19 08:10:43 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/20 05:47:14 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ int	ft_controll_key(int key, t_map *map)
 
 void	ft_move(t_map *map)
 {
-	mlx_key_hook(map->window, &ft_controll_key, map);
+	mlx_hook(map->window, 2, 1L << 0, &ft_controll_key, map);
 }

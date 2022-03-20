@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 19:54:09 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/20 08:12:29 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/20 09:52:04 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,18 @@
 # define GREEN "\x1b[32m"
 # define SIZE	48
 
+typedef struct s_animate
+{
+	void	*img;
+	void	*next;
+	void	*prev;
+}	t_animate;
+
 typedef struct s_sprite
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
+	t_animate	img;
 }	t_sprite;
 
 typedef struct s_control_obj

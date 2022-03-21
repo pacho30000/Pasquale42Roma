@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 19:54:09 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/21 14:02:24 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/21 14:03:15 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,17 @@
 # define RED "\x1b[31m"
 # define GREEN "\x1b[32m"
 # define SIZE	48
+# define UP 1
+# define DW -1
+# define DX 2
+# define SX -2
 
 typedef struct s_animate
 {
-	void	*img;
-	void	*next;
-	void	*prev;
+	int					direction;
+	void				*img;
+	struct s_animate	*next;
+	struct s_animate	*prev;
 }	t_animate;
 
 typedef struct s_sprite
@@ -54,11 +59,11 @@ typedef struct s_map
 	char			**map;
 	void			*mlx_ptr;
 	void			*window;
-	t_sprite		pacman;
-	t_sprite		red;
-	t_sprite		pink;
-	t_sprite		orange;
-	t_sprite		blu;
+	t_sprite		*pacman;
+	t_sprite		*red;
+	t_sprite		*pink;
+	t_sprite		*orange;
+	t_sprite		*blu;
 	t_img			*img;
 	t_control_obj	*object;
 }	t_map;

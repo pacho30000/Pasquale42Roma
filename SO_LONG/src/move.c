@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 06:38:52 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/20 09:13:23 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/20 18:06:27 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ ESC(53)--- Invio(36) --- Tab(49)
 */
 int	ft_controll_key(int key, t_map *map)
 {
-	map->map[map->pacman.x][map->pacman.y] = '0';
+	map->map[map->pacman->x][map->pacman->y] = '0';
 	if (key == 13 || key == 126)
 		ft_pacman_up(map);
 	if (key == 125 || key == 1)
@@ -52,10 +52,10 @@ int	ft_controll_key(int key, t_map *map)
 
 void	ft_move(t_map *map)
 {
-	map->map[map->red.x][map->red.y] = 0;
-	map->map[map->orange.x][map->orange.y] = 0;
-	map->map[map->blu.x][map->blu.y] = 0;
-	map->map[map->pink.x][map->pink.y] = 0;
+	map->map[map->red->x][map->red->y] = 0;
+	map->map[map->orange->x][map->orange->y] = 0;
+	map->map[map->blu->x][map->blu->y] = 0;
+	map->map[map->pink->x][map->pink->y] = 0;
 	mlx_hook(map->window, 2, 1L << 0, &ft_controll_key, map);
 	//mlx_loop_hook(map->mlx_ptr, ft_animate, map);
 }

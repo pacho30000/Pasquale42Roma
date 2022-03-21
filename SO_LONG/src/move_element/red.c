@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 03:20:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/20 09:17:36 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/20 18:03:03 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,20 @@ void	ft_animate_fix_red(t_map *map, int i)
 		i++;
 	}
 	i = 0;
+}
+
+void	ft_fill_list(t_map *map, t_img *img)
+{
+	map->red->img = (t_animate *)malloc(sizeof(t_animate));
+	map->red->img->direction = UP;
+	map->red->img->img = img->red_up_1;
+	map->red->img->prev = NULL;
+	map->red->img->next = img->red_up_2;
+	map->red->img = map->red->img->next;
+	map->red->img->direction = UP;
+	map->red->img->img = img->red_up_2;
+	map->red->img->prev = img->red_up_1;
+	map->red->img->next = NULL;
 }
 
 void	ft_fill_to_img_red(t_img *img, void *mlx_ptr)

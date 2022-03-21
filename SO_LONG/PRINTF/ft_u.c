@@ -1,59 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putesa.c                                        :+:      :+:    :+:   */
+/*   ft_u.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aanghel <aanghel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/29 13:58:03 by aanghel           #+#    #+#             */
-/*   Updated: 2022/02/07 23:47:17 by aanghel          ###   ########.fr       */
+/*   Created: 2022/01/29 14:33:48 by aanghel           #+#    #+#             */
+/*   Updated: 2022/02/07 23:46:55 by aanghel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	ft_digitesa(uintptr_t nb, char *base)
+static void	ft_digitu(unsigned int nb)
 {
-	if (nb < 0)
+	int	n;
+
+	if (nb >= 10)
 	{
-		ft_char('-');
-		ft_digitesa(-nb, base);
+		ft_digitu(nb / 10);
+		n = (nb % 10) + 48;
+		write(1, &n, 1);
 	}
-	else if (nb >= 16)
+	if (nb >= 0 && nb < 10)
 	{
-		ft_digitesa(nb / 16, base);
-		ft_char(base[nb % 16]);
-	}
-	else if (nb >= 0)
-	{
-		ft_char(base[nb % 16]);
+		n = nb + 48;
+		write(1, &n, 1);
 	}
 }
 
-int	ft_lenesa(uintptr_t nb)
+unsigned int	ft_lenu(unsigned int nb)
 {
 	int	i;
 
 	i = 0;
 	if (nb == 0)
-		return (1);
+		i++;
+	if (nb < 0)
+	{
+		nb = nb * -1;
+		i++;
+	}
 	while (nb > 0)
 	{
-		nb = nb / 16;
+		nb = nb / 10;
 		i++;
 	}
 	return (i);
 }
 
-int	ft_putesa(uintptr_t num)
+int	ft_u(unsigned int num)
 {
-	int		count;
-	char	*base;
+	int	count;
 
-	write(1, "0x", 2);
-	count = 2;
-	count += ft_lenesa(num);
-	base = "0123456789abcdef";
-	ft_digitesa(num, base);
+	count = ft_lenu(num);
+	ft_digitu(num);
 	return (count);
 }

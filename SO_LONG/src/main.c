@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 19:59:37 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/15 21:45:02 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/20 17:29:52 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ Il terzo if controlla il contenuto della mappa, elabora la lunghezza (map.w),
 int	ft_checker(int argc, char **argv, t_map *map)
 {
 	int				i;
-	t_control_obj	obj;
 
 	i = 0;
 	if (argc < 2)
@@ -38,25 +37,27 @@ int	ft_checker(int argc, char **argv, t_map *map)
 		ft_printf("\x1b[31m%s\n", "Invalid exstension map!");
 		return (0);
 	}
-	if (ft_checker_map(argv[1], map, &obj) == 0)
+	if (ft_checker_map(argv[1], map, map->object) == 0)
 		return (0);
-	ft_printf ("La matrice é larga : %d", map->w);
-	ft_printf ("\nLa matrice é alta : %d", map->h);
+	ft_printf ("\nLa matrice é larga : %d", map->w);
+	ft_printf ("\nLa matrice é alta : %d\n", map->h);
 	return (1);
 }
 
 int	main(int argc, char **argv)
 {
 	t_map	map;
-	void	*mlx;
-	void	*win_mlx;
+	int		i;
+	int		j;
 
 	map.h = 0;
+	i = 0;
+	map.object = malloc(sizeof(t_control_obj));
 	if (ft_checker(argc, argv, &map) == 0)
 		return (0);
-
-	//ft_chack_map();
-	//mlx = mlx_init();
-	//win_mlx = mlx_new_window(mlx, 25 * 64, 12 * 64, "Prova");
-	//mlx_loop(mlx);
+	ft_creating_map(&map);
+	ft_move(&map);
+	mlx_loop(map.mlx_ptr);
+	exit (0);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 23:52:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/15 21:54:54 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/20 17:28:43 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,17 @@ int	ft_hight_matrix(t_map *map, char *line)
 	i = 0;
 	while (line[i] != '\0')
 	{
+		i++;
 		if (line[i] == '\n')
 		{
 			map->h++;
 			i++;
 			if (i != map->h * map->w)
 			{
-				ft_printf("\x1b[31m%s\n", "The map is not rettangular.");
+				ft_printf("%s\n", "The map is not rettangular.");
 				return (0);
 			}
 		}
-		i++;
 	}
 	return (1);
 }
@@ -73,7 +73,7 @@ int	ft_width_matrix(int file, t_map *map)
 	map->w = find_newline(map->max_line);
 	if (ft_hight_matrix(map, map->max_line) == 0)
 	{
-		ft_printf("\x1b[31m%s\n", "Error with ft_hight_matrix!");
+		ft_printf("\x1b[31m%s\n", "Error with ft_heigth_matrix!");
 		free(map->max_line);
 		return (0);
 	}
@@ -96,11 +96,13 @@ int	ft_checker_map(const char *file, t_map *map, t_control_obj *obj)
 		close (fd);
 		return (0);
 	}
-	if (ft_contenet_map(map, obj) == 0)
+	close (fd);
+	//map->w = map->w - 2;
+	if (ft_content_map(map, obj) == 0 || ft_count_element(map, obj) == 0
+		|| ft_check_maps_walls(map) == 0)
 	{
-		close (fd);
+		free (map->max_line);
 		return (0);
 	}
-	close (fd);
 	return (1);
 }

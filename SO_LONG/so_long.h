@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 19:54:09 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/20 09:52:04 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/21 14:02:24 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_sprite
 {
 	int			x;
 	int			y;
-	t_animate	img;
+	t_animate	*img;
 }	t_sprite;
 
 typedef struct s_control_obj

@@ -6,56 +6,29 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 03:20:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/20 18:03:03 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/21 18:51:02 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../so_long.h"
 
-void	ft_animate_fix_red(t_map *map, int i)
+void	ft_animate_red(t_map *map)
 {
-	static int	g;
-
-	g = 1;
-	while (i < (2000001 * 100))
+	if (map->frames % 2 == 0)
 	{
-		if (i == (200000 / 4) && g == 1)
-		{
-			g = 0;
-			mlx_put_image_to_window(map->mlx_ptr, map->window, \
-				map->img->back_g, map->red.y * SIZE, map->red.x * SIZE);
-			mlx_put_image_to_window(map->mlx_ptr, map->window, \
-				map->img->red_dw_2, map->red.y * SIZE, map->red.x * SIZE);
-			mlx_put_image_to_window(map->mlx_ptr, map->window, \
-				map->img->back_g, map->red.y * SIZE, map->red.x * SIZE);
-		}
-		else if (i == (200000 * 100) && g == 0)
-		{
-			g = 1;
-			mlx_put_image_to_window(map->mlx_ptr, map->window, \
-				map->img->back_g, map->red.y * SIZE, map->red.x * SIZE);
-			mlx_put_image_to_window(map->mlx_ptr, map->window, \
-				map->img->red_dw_1, map->red.y * SIZE, map->red.x * SIZE);
-			mlx_put_image_to_window(map->mlx_ptr, map->window, \
-				map->img->back_g, map->red.y * SIZE, map->red.x * SIZE);
-		}
-		i++;
+		mlx_put_image_to_window(map->mlx_ptr, map->window, map->img->back_g, \
+									map->red.y * SIZE, map->red.x * SIZE);
+		mlx_put_image_to_window(map->mlx_ptr, map->window, map->img->red_dw_1, \
+								map->red.y * SIZE, map->red.x * SIZE);
 	}
-	i = 0;
-}
-
-void	ft_fill_list(t_map *map, t_img *img)
-{
-	map->red->img = (t_animate *)malloc(sizeof(t_animate));
-	map->red->img->direction = UP;
-	map->red->img->img = img->red_up_1;
-	map->red->img->prev = NULL;
-	map->red->img->next = img->red_up_2;
-	map->red->img = map->red->img->next;
-	map->red->img->direction = UP;
-	map->red->img->img = img->red_up_2;
-	map->red->img->prev = img->red_up_1;
-	map->red->img->next = NULL;
+	ft_temp_animate();
+	if (map->frames % 2 != 0)
+	{
+		mlx_put_image_to_window(map->mlx_ptr, map->window, map->img->back_g, \
+								map->red.y * SIZE, map->red.x * SIZE);
+		mlx_put_image_to_window(map->mlx_ptr, map->window, map->img->red_dw_2, \
+								map->red.y * SIZE, map->red.x * SIZE);
+	}
 }
 
 void	ft_fill_to_img_red(t_img *img, void *mlx_ptr)

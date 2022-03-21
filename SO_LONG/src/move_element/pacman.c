@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 06:23:09 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/20 18:04:10 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/21 18:52:45 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,57 +14,57 @@
 
 void	ft_pacman_dx(t_map *map)
 {
-	if (ft_can_move(map->map[map->pacman->x][map->pacman->y + 1]) == 1)
+	if (ft_can_move(map->map[map->pacman.x][map->pacman.y + 1]) == 1)
 	{
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-	map->img->back_g, map->pacman->y * SIZE, map->pacman->x * SIZE);
+	map->img->back_g, map->pacman.y * SIZE, map->pacman.x * SIZE);
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-	map->img->back_g, (map->pacman->y + 1) * SIZE, map->pacman->x * SIZE);
+	map->img->back_g, (map->pacman.y + 1) * SIZE, map->pacman.x * SIZE);
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-	map->img->pacman_open_dx, (map->pacman->y + 1) * SIZE, map->pacman->x * SIZE);
-		map->pacman->y++;
+	map->img->pacman_open_dx, (map->pacman.y + 1) * SIZE, map->pacman.x * SIZE);
+		map->pacman.y++;
 	}
 }
 
 void	ft_pacman_sx(t_map *map)
 {
-	if (ft_can_move(map->map[map->pacman->x][map->pacman->y - 1]) == 1)
+	if (ft_can_move(map->map[map->pacman.x][map->pacman.y - 1]) == 1)
 	{
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-	map->img->back_g, map->pacman->y * SIZE, map->pacman->x * SIZE);
+	map->img->back_g, map->pacman.y * SIZE, map->pacman.x * SIZE);
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-	map->img->back_g, (map->pacman->y - 1) * SIZE, map->pacman->x * SIZE);
+	map->img->back_g, (map->pacman.y - 1) * SIZE, map->pacman.x * SIZE);
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-	map->img->pacman_open_sx, (map->pacman->y - 1) * SIZE, map->pacman->x * SIZE);
-		map->pacman->y--;
+	map->img->pacman_open_sx, (map->pacman.y - 1) * SIZE, map->pacman.x * SIZE);
+		map->pacman.y--;
 	}
 }
 
 void	ft_pacman_dw(t_map *map)
 {
-	if (ft_can_move(map->map[map->pacman->x + 1][map->pacman->y]) == 1)
+	if (ft_can_move(map->map[map->pacman.x + 1][map->pacman.y]) == 1)
 	{
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-	map->img->back_g, map->pacman->y * SIZE, map->pacman->x * SIZE);
+	map->img->back_g, map->pacman.y * SIZE, map->pacman.x * SIZE);
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-	map->img->back_g, map->pacman->y * SIZE, (map->pacman->x + 1) * SIZE);
+	map->img->back_g, map->pacman.y * SIZE, (map->pacman.x + 1) * SIZE);
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-	map->img->pacman_open_dw, map->pacman->y * SIZE, (map->pacman->x + 1) * SIZE);
-		map->pacman->x++;
+	map->img->pacman_open_dw, map->pacman.y * SIZE, (map->pacman.x + 1) * SIZE);
+		map->pacman.x++;
 	}
 }
 
 void	ft_pacman_up(t_map *map)
 {
-	if (ft_can_move(map->map[map->pacman->x - 1][map->pacman->y]) == 1)
+	if (ft_can_move(map->map[map->pacman.x - 1][map->pacman.y]) == 1)
 	{
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-	map->img->back_g, map->pacman->y * SIZE, map->pacman->x * SIZE);
+	map->img->back_g, map->pacman.y * SIZE, map->pacman.x * SIZE);
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-	map->img->back_g, map->pacman->y * SIZE, (map->pacman->x - 1) * SIZE);
+	map->img->back_g, map->pacman.y * SIZE, (map->pacman.x - 1) * SIZE);
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-	map->img->pacman_open_up, map->pacman->y * SIZE, (map->pacman->x - 1) * SIZE);
-		map->pacman->x--;
+	map->img->pacman_open_up, map->pacman.y * SIZE, (map->pacman.x - 1) * SIZE);
+		map->pacman.x--;
 	}
 }
 

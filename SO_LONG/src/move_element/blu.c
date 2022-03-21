@@ -6,11 +6,30 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 06:22:00 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/18 07:09:42 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/21 20:11:42 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../so_long.h"
+
+void	ft_animate_blu(t_map *map)
+{
+	if (map->frames % 2 == 0)
+	{
+		mlx_put_image_to_window(map->mlx_ptr, map->window, map->img->back_g, \
+									map->blu->y * SIZE, map->blu->x * SIZE);
+		mlx_put_image_to_window(map->mlx_ptr, map->window, \
+				map->img->blu_dw_1, map->blu->y * SIZE, map->blu->x * SIZE);
+	}
+	ft_temp_animate();
+	if (map->frames % 2 != 0)
+	{
+		mlx_put_image_to_window(map->mlx_ptr, map->window, map->img->back_g, \
+								map->blu->y * SIZE, map->blu->x * SIZE);
+		mlx_put_image_to_window(map->mlx_ptr, map->window, \
+		map->img->blu_dw_2, map->blu->y * SIZE, map->blu->x * SIZE);
+	}	
+}
 
 void	ft_fill_to_img_blu(t_img *img, void *mlx_ptr)
 {

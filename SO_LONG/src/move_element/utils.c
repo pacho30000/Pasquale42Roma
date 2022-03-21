@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 08:12:07 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/21 18:47:46 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/21 20:42:38 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,6 @@ void	ft_temp_animate(void)
 	while (i <= 20000000)
 		i++;
 	i = 0;
-	while (i <= 20000000)
-		i++;
-	i = 0;
-	while (i <= 20000000)
-		i++;
-	i = 0;
-	while (i <= 2000000)
-		i++;
-	if (i == 2147483646)
-		i = 0;
 }
 
 int	ft_can_move(char c)

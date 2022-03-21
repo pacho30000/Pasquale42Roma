@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 19:54:09 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/21 18:50:48 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/21 20:12:03 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ typedef struct s_map
 	char			**map;
 	void			*mlx_ptr;
 	void			*window;
-	t_sprite		pacman;
-	t_sprite		red;
-	t_sprite		pink;
-	t_sprite		orange;
-	t_sprite		blu;
+	t_sprite		*pacman;
+	t_sprite		*red;
+	t_sprite		*pink;
+	t_sprite		*orange;
+	t_sprite		*blu;
 	t_img			*img;
 	t_control_obj	*object;
 }	t_map;
@@ -76,11 +76,11 @@ void		ft_img(t_map *map);
 void		ft_fill_to_img_red(t_img *img, void *mlx_ptr);
 void		ft_animate_red(t_map *map);
 void		ft_fill_to_img_orange(t_img *img, void *mlx_ptr);
-void		ft_animate_fix_orange(t_map *map, int dir);
+void		ft_animate_orange(t_map *map);
 void		ft_fill_to_img_pink(t_img *img, void *mlx_ptr);
-void		ft_animate_fix_pink(t_map *map, int dir);
+void		ft_animate_pink(t_map *map);
 void		ft_fill_to_img_blu(t_img *img, void *mlx_ptr);
-void		ft_animate_fix_blu(t_map *map, int dir);
+void		ft_animate_blu(t_map *map);
 void		ft_fill_to_img_pacman(t_img *img, void *mlx_ptr);
 void		ft_pacman_up(t_map *map);
 void		ft_pacman_dw(t_map *game);

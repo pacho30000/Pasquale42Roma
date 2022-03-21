@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:01:58 by aanghel           #+#    #+#             */
-/*   Updated: 2022/03/20 06:51:06 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/21 20:10:41 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_print_map_in_shell(t_map *map)
 		j = 0;
 		while (map->map[i][j] != '\0')
 		{
-			ft_printf("%c", map->map[i][j]);
+			ft_printf(" %c", map->map[i][j]);
 			j++;
 		}
 		if (map->map[i][j] == '\0')

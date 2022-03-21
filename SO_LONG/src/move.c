@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 06:38:52 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/21 18:52:20 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/21 20:42:54 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@ int	ft_animate(t_map *map)
 {
 	ft_animate_red(map);
 	map->frames++;
-	map->frames = 0;
-	// ft_animate_fix_orange;
-	// ft_animate_fix_blu;
-	// ft_animate_fix_pink;
+	ft_animate_pink(map);
+	ft_animate_orange(map);
+	ft_animate_blu(map);
 	return (0);
 }
 
@@ -31,7 +30,7 @@ ESC(53)--- Invio(36) --- Tab(49)
 */
 int	ft_controll_key(int key, t_map *map)
 {
-	map->map[map->pacman.x][map->pacman.y] = '0';
+	map->map[map->pacman->x][map->pacman->y] = '0';
 	if (key == 13 || key == 126)
 		ft_pacman_up(map);
 	if (key == 125 || key == 1)
@@ -50,10 +49,12 @@ int	ft_controll_key(int key, t_map *map)
 
 void	ft_move(t_map *map)
 {
-	map->map[map->red.x][map->red.y] = '0';
-	map->map[map->orange.x][map->orange.y] = '0';
-	map->map[map->blu.x][map->blu.y] = '0';
-	map->map[map->pink.x][map->pink.y] = '0';
+	map->map[map->red->x][map->red->y] = '0';
+	map->map[map->orange->x][map->orange->y] = '0';
+	map->map[map->blu->x][map->blu->y] = '0';
+	map->map[map->pink->x][map->pink->y] = '0';
+	mlx_do_sync(map->mlx_ptr);
+	mlx_do_key_autorepeatoff(map->mlx_ptr);
 	mlx_hook(map->window, 2, 1L << 0, &ft_controll_key, map);
 	mlx_loop_hook(map->mlx_ptr, ft_animate, map);
 }

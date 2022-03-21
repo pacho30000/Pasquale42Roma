@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 03:20:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/21 18:51:02 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/21 19:42:29 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ void	ft_animate_red(t_map *map)
 	if (map->frames % 2 == 0)
 	{
 		mlx_put_image_to_window(map->mlx_ptr, map->window, map->img->back_g, \
-									map->red.y * SIZE, map->red.x * SIZE);
+									map->red->y * SIZE, map->red->x * SIZE);
 		mlx_put_image_to_window(map->mlx_ptr, map->window, map->img->red_dw_1, \
-								map->red.y * SIZE, map->red.x * SIZE);
+								map->red->y * SIZE, map->red->x * SIZE);
 	}
 	ft_temp_animate();
 	if (map->frames % 2 != 0)
 	{
 		mlx_put_image_to_window(map->mlx_ptr, map->window, map->img->back_g, \
-								map->red.y * SIZE, map->red.x * SIZE);
+								map->red->y * SIZE, map->red->x * SIZE);
 		mlx_put_image_to_window(map->mlx_ptr, map->window, map->img->red_dw_2, \
-								map->red.y * SIZE, map->red.x * SIZE);
+								map->red->y * SIZE, map->red->x * SIZE);
 	}
 }
 

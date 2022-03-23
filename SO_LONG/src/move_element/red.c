@@ -6,19 +6,93 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 03:20:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/21 19:42:29 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/23 04:50:39 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../so_long.h"
 
+static void	ft_move_noblock(t_map *map)
+{
+	if (ft_can_move(map->map[map->red->x - 1][map->red->y]) == 1)
+	{
+		ft_put_back_enemy(map, map->red->x, map->red->y);
+		ft_put_new_i(map, map->red->x - 1, map->red->y, \
+					map->img->red_up);
+		map->map[map->red->x][map->red->y] = 'N';
+		map->red->x--;
+	}
+}
+
+void	ft_move_red_y(t_map *map)
+{
+	if (map->pacman->y < map->red->y)
+	{
+		if (ft_can_move(map->map[map->red->x][map->red->y - 1]) == 1)
+		{
+			ft_put_back_enemy(map, map->red->x, map->red->y);
+			ft_put_new_i(map, map->red->x, map->red->y - 1, \
+					map->img->red_sx);
+			map->map[map->red->x][map->red->y] = 'N';
+			map->red->y--;
+		}
+		else
+			ft_move_noblock(map);
+	}
+	else if (map->pacman->y > map->red->y)
+	{
+		if (ft_can_move(map->map[map->red->x][map->red->y + 1]) == 1)
+		{
+			ft_put_back_enemy(map, map->red->x, map->red->y);
+			ft_put_new_i(map, map->red->x, map->red->y + 1, map->img->red_dx);
+			map->map[map->red->x][map->red->y] = 'N';
+			map->red->y++;
+		}
+		else
+			ft_move_noblock(map);
+	}
+}
+
+void	ft_move_red_x(t_map *map)
+{
+	if (map->pacman->x < map->red->x)
+	{
+		if (ft_can_move(map->map[map->red->x - 1][map->red->y]) == 1)
+		{
+			ft_put_back_enemy(map, map->red->x, map->red->y);
+			ft_put_new_i(map, map->red->x - 1, map->red->y, \
+					map->img->red_up);
+			map->map[map->red->x][map->red->y] = 'N';
+			map->red->x--;
+		}
+		else
+			ft_move_red_y(map);
+	}
+	else if (map->pacman->x == map->red->x)
+		ft_move_red_y(map);
+	else if (map->pacman->x > map->red->x)
+	{
+		if (ft_can_move(map->map[map->red->x + 1][map->red->y]) == 1)
+		{
+			ft_put_back_enemy(map, map->red->x, map->red->y);
+			ft_put_new_i(map, map->red->x + 1, map->red->y, \
+					map->img->red_dw);
+			map->map[map->red->x][map->red->y] = 'N';
+			map->red->x++;
+		}
+		else
+			ft_move_red_y(map);
+	}
+}
+
+//  Va modificata aspetta Irina --Solo i piedi
 void	ft_animate_red(t_map *map)
 {
 	if (map->frames % 2 == 0)
 	{
 		mlx_put_image_to_window(map->mlx_ptr, map->window, map->img->back_g, \
 									map->red->y * SIZE, map->red->x * SIZE);
-		mlx_put_image_to_window(map->mlx_ptr, map->window, map->img->red_dw_1, \
+		mlx_put_image_to_window(map->mlx_ptr, map->window, map->img->red_dw, \
 								map->red->y * SIZE, map->red->x * SIZE);
 	}
 	ft_temp_animate();
@@ -26,19 +100,15 @@ void	ft_animate_red(t_map *map)
 	{
 		mlx_put_image_to_window(map->mlx_ptr, map->window, map->img->back_g, \
 								map->red->y * SIZE, map->red->x * SIZE);
-		mlx_put_image_to_window(map->mlx_ptr, map->window, map->img->red_dw_2, \
+		mlx_put_image_to_window(map->mlx_ptr, map->window, map->img->red_dw, \
 								map->red->y * SIZE, map->red->x * SIZE);
 	}
 }
 
 void	ft_fill_to_img_red(t_img *img, void *mlx_ptr)
 {
-	img->red_dw_1 = mlx_xpm_file_to_image(mlx_ptr, RED_DW_1, &img->w, &img->h);
-	img->red_dw_2 = mlx_xpm_file_to_image(mlx_ptr, RED_DW_2, &img->w, &img->h);
-	img->red_dx_1 = mlx_xpm_file_to_image(mlx_ptr, RED_DX_1, &img->w, &img->h);
-	img->red_dx_2 = mlx_xpm_file_to_image(mlx_ptr, RED_DX_2, &img->w, &img->h);
-	img->red_sx_1 = mlx_xpm_file_to_image(mlx_ptr, RED_SX_1, &img->w, &img->h);
-	img->red_sx_2 = mlx_xpm_file_to_image(mlx_ptr, RED_SX_2, &img->w, &img->h);
-	img->red_up_1 = mlx_xpm_file_to_image(mlx_ptr, RED_UP_1, &img->w, &img->h);
-	img->red_up_2 = mlx_xpm_file_to_image(mlx_ptr, RED_UP_2, &img->w, &img->h);
+	img->red_dw = mlx_xpm_file_to_image(mlx_ptr, RED_DW_1, &img->w, &img->h);
+	img->red_dx = mlx_xpm_file_to_image(mlx_ptr, RED_DX_1, &img->w, &img->h);
+	img->red_sx = mlx_xpm_file_to_image(mlx_ptr, RED_SX_1, &img->w, &img->h);
+	img->red_up = mlx_xpm_file_to_image(mlx_ptr, RED_UP_1, &img->w, &img->h);
 }

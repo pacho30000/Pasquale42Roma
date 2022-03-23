@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 04:08:45 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/19 06:58:29 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/23 04:38:55 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,38 +68,22 @@ typedef struct s_img
 	void	*wall;
 	void	*zero;
 	void	*exit;
-	void	*blu_dw_1;
-	void	*blu_dw_2;
-	void	*blu_up_1;
-	void	*blu_up_2;
-	void	*blu_sx_1;
-	void	*blu_sx_2;
-	void	*blu_dx_1;
-	void	*blu_dx_2;
-	void	*orange_dw_1;
-	void	*orange_dw_2;
-	void	*orange_up_1;
-	void	*orange_up_2;
-	void	*orange_sx_1;
-	void	*orange_sx_2;
-	void	*orange_dx_1;
-	void	*orange_dx_2;
-	void	*red_dw_1;
-	void	*red_dw_2;
-	void	*red_up_1;
-	void	*red_up_2;
-	void	*red_sx_1;
-	void	*red_sx_2;
-	void	*red_dx_1;
-	void	*red_dx_2;
-	void	*pink_dw_1;
-	void	*pink_dw_2;
-	void	*pink_up_1;
-	void	*pink_up_2;
-	void	*pink_sx_1;
-	void	*pink_sx_2;
-	void	*pink_dx_1;
-	void	*pink_dx_2;
+	void	*blu_dw;
+	void	*blu_up;
+	void	*blu_sx;
+	void	*blu_dx;
+	void	*orange_dw;
+	void	*orange_up;
+	void	*orange_sx;
+	void	*orange_dx;
+	void	*red_dw;
+	void	*red_up;
+	void	*red_sx;
+	void	*red_dx;
+	void	*pink_dw;
+	void	*pink_up;
+	void	*pink_sx;
+	void	*pink_dx;
 	void	*pacman_close;
 	void	*pacman_dw;
 	void	*pacman_dx;

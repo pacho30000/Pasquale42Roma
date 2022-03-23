@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 00:32:18 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/21 19:36:25 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/23 04:47:41 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,21 @@ int	ft_put_img_enemy(t_map *map, int temp, int x, int y)
 	if (temp == 4)
 	{
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-								map->img->pink_dw_1, y * SIZE, x * SIZE);
+								map->img->pink_dw, y * SIZE, x * SIZE);
 		map->pink->x = x;
 		map->pink->y = y;
 	}
 	if (temp == 3)
 	{
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-								map->img->orange_dw_1, y * SIZE, x * SIZE);
+								map->img->orange_dw, y * SIZE, x * SIZE);
 		map->orange->x = x;
 		map->orange->y = y;
 	}
 	if (temp == 2)
 	{
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-								map->img->blu_dw_1, y * SIZE, x * SIZE);
+								map->img->blu_dw, y * SIZE, x * SIZE);
 		map->blu->x = x;
 		map->blu->y = y;
 	}
@@ -79,7 +79,7 @@ void	ft_put_img(t_map *map, t_img *img)
 				if (temp == 1)
 				{
 					mlx_put_image_to_window(map->mlx_ptr, map->window, \
-										map->img->red_dw_1, y * SIZE, x * SIZE);
+										map->img->red_dw, y * SIZE, x * SIZE);
 					map->red->x = x;
 					map->red->y = y;
 				}

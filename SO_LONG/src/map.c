@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:01:58 by aanghel           #+#    #+#             */
-/*   Updated: 2022/03/21 20:10:41 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/22 22:49:23 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_print_map_in_shell(t_map *map)
 	int	j;
 
 	i = 0;
+	ft_printf("\n");
 	while (i < map->h)
 	{
 		j = 0;
@@ -69,7 +70,7 @@ void	ft_creating_map(t_map *map)
 		return ;
 	while (i < map->h)
 	{
-		map->map[i] = (char *)malloc(sizeof(char) * map->w);
+		map->map[i] = (char *)malloc(sizeof(char) * (map->w - 1));
 		if (!map->map[i])
 		{
 			free(map->map);

@@ -6,7 +6,7 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/18 07:28:35 by pcatapan          #+#    #+#              #
-#    Updated: 2022/03/21 18:38:55 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/03/22 22:18:41 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,9 @@ clean:
 	rm -f $(OBJS)
 
 fclean:	clean
-	rm -rf $(NAME) a.*
+	rm -rf $(NAME) 
+	rm -rf a.*
+	rm -rf *.dSYM
 
 norm:
 	norminette -R ./src ./PRINTF

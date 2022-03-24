@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:01:58 by aanghel           #+#    #+#             */
-/*   Updated: 2022/03/24 05:12:43 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/24 06:07:55 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	ft_fill_matrix(t_map *map, char **matrice)
 		}
 		x++;
 	}
-	free(map->max_line);
 }
 
 void	ft_print_map_in_shell(t_map *map, char **print)
@@ -96,7 +95,9 @@ void	ft_creating_map(t_map *map)
 	map->w = map->w - 1;
 	ft_malloc_matrix(map, i);
 	ft_fill_matrix(map, map->map);
-	ft_print_map_in_shell(map, map->enemy);
+	ft_fill_matrix(map, map->enemy);
+	free(map->max_line);
+	ft_print_map_in_shell(map, map->map);
 	map->mlx_ptr = mlx_init();
 	map->window = mlx_new_window(map->mlx_ptr, map->w * SIZE, \
 					map->h * SIZE, "42 PacMan by Pcatapan");

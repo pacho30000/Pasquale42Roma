@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 03:20:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/23 04:50:39 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/24 03:08:56 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 static void	ft_move_noblock(t_map *map)
 {
-	if (ft_can_move(map->map[map->red->x - 1][map->red->y]) == 1)
+	if (ft_can_enemy(map, map->red->x - 1, map->red->y) == 1)
 	{
 		ft_put_back_enemy(map, map->red->x, map->red->y);
-		ft_put_new_i(map, map->red->x - 1, map->red->y, \
+		ft_new_i(map, map->red->x - 1, map->red->y, \
 					map->img->red_up);
-		map->map[map->red->x][map->red->y] = 'N';
 		map->red->x--;
 	}
 }
@@ -28,12 +27,11 @@ void	ft_move_red_y(t_map *map)
 {
 	if (map->pacman->y < map->red->y)
 	{
-		if (ft_can_move(map->map[map->red->x][map->red->y - 1]) == 1)
+		if (ft_can_enemy(map, map->red->x, map->red->y - 1) == 1)
 		{
 			ft_put_back_enemy(map, map->red->x, map->red->y);
-			ft_put_new_i(map, map->red->x, map->red->y - 1, \
+			ft_new_i(map, map->red->x, map->red->y - 1, \
 					map->img->red_sx);
-			map->map[map->red->x][map->red->y] = 'N';
 			map->red->y--;
 		}
 		else
@@ -41,11 +39,10 @@ void	ft_move_red_y(t_map *map)
 	}
 	else if (map->pacman->y > map->red->y)
 	{
-		if (ft_can_move(map->map[map->red->x][map->red->y + 1]) == 1)
+		if (ft_can_enemy(map, map->red->x, map->red->y + 1) == 1)
 		{
 			ft_put_back_enemy(map, map->red->x, map->red->y);
-			ft_put_new_i(map, map->red->x, map->red->y + 1, map->img->red_dx);
-			map->map[map->red->x][map->red->y] = 'N';
+			ft_new_i(map, map->red->x, map->red->y + 1, map->img->red_dx);
 			map->red->y++;
 		}
 		else
@@ -57,12 +54,10 @@ void	ft_move_red_x(t_map *map)
 {
 	if (map->pacman->x < map->red->x)
 	{
-		if (ft_can_move(map->map[map->red->x - 1][map->red->y]) == 1)
+		if (ft_can_enemy(map, map->red->x - 1, map->red->y) == 1)
 		{
 			ft_put_back_enemy(map, map->red->x, map->red->y);
-			ft_put_new_i(map, map->red->x - 1, map->red->y, \
-					map->img->red_up);
-			map->map[map->red->x][map->red->y] = 'N';
+			ft_new_i(map, map->red->x - 1, map->red->y, map->img->red_up);
 			map->red->x--;
 		}
 		else
@@ -72,12 +67,10 @@ void	ft_move_red_x(t_map *map)
 		ft_move_red_y(map);
 	else if (map->pacman->x > map->red->x)
 	{
-		if (ft_can_move(map->map[map->red->x + 1][map->red->y]) == 1)
+		if (ft_can_enemy(map, map->red->x + 1, map->red->y) == 1)
 		{
 			ft_put_back_enemy(map, map->red->x, map->red->y);
-			ft_put_new_i(map, map->red->x + 1, map->red->y, \
-					map->img->red_dw);
-			map->map[map->red->x][map->red->y] = 'N';
+			ft_new_i(map, map->red->x + 1, map->red->y, map->img->red_dw);
 			map->red->x++;
 		}
 		else

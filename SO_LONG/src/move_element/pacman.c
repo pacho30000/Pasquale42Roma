@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 06:23:09 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/23 04:49:13 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/24 03:08:37 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 void	ft_pacman_dx(t_map *map)
 {
-	if (ft_can_move(map->map[map->pacman->x][map->pacman->y + 1]) == 1 && \
+	if (ft_can_player(map->map[map->pacman->x][map->pacman->y + 1]) == 1 && \
 			map->t_img == 0)
 	{
 		map->map[map->pacman->x][map->pacman->y] = '2';
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
 		map->img->back_g, map->pacman->y * SIZE, map->pacman->x * SIZE);
-		ft_put_new_i(map, map->pacman->x, map->pacman->y + 1, \
+		ft_new_i(map, map->pacman->x, map->pacman->y + 1, \
 						map->img->pacman_open_dx);
 		map->pacman->y++;
 		map->t_img = 1;
 	}
-	else if (ft_can_move(map->map[map->pacman->x][map->pacman->y + 1]) == 1 && \
-			map->t_img == 1)
+	else if (ft_can_player(map->map[map->pacman->x][map->pacman->y + 1]) == 1 \
+				&& map->t_img == 1)
 	{
 		map->map[map->pacman->x][map->pacman->y] = '2';
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
 	map->img->back_g, map->pacman->y * SIZE, map->pacman->x * SIZE);
-		ft_put_new_i(map, map->pacman->x, map->pacman->y + 1, \
+		ft_new_i(map, map->pacman->x, map->pacman->y + 1, \
 						map->img->pacman_dx);
 	map->pacman->y++;
 	map->t_img = 0;
@@ -40,24 +40,24 @@ void	ft_pacman_dx(t_map *map)
 
 void	ft_pacman_sx(t_map *map)
 {
-	if (ft_can_move(map->map[map->pacman->x][map->pacman->y - 1]) == 1 && \
+	if (ft_can_player(map->map[map->pacman->x][map->pacman->y - 1]) == 1 && \
 			map->t_img == 0)
 	{
 		map->map[map->pacman->x][map->pacman->y] = '2';
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
 	map->img->back_g, map->pacman->y * SIZE, map->pacman->x * SIZE);
-		ft_put_new_i(map, map->pacman->x, map->pacman->y - 1, \
+		ft_new_i(map, map->pacman->x, map->pacman->y - 1, \
 						map->img->pacman_open_sx);
 		map->pacman->y--;
 		map->t_img = 1;
 	}
-	else if (ft_can_move(map->map[map->pacman->x][map->pacman->y - 1]) == 1 && \
+	else if (ft_can_player(map->map[map->pacman->x][map->pacman->y - 1]) == 1 && \
 			map->t_img == 1)
 	{
 		map->map[map->pacman->x][map->pacman->y] = '2';
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
 	map->img->back_g, map->pacman->y * SIZE, map->pacman->x * SIZE);
-		ft_put_new_i(map, map->pacman->x, map->pacman->y - 1, \
+		ft_new_i(map, map->pacman->x, map->pacman->y - 1, \
 						map->img->pacman_sx);
 		map->pacman->y--;
 		map->t_img = 0;
@@ -66,24 +66,24 @@ void	ft_pacman_sx(t_map *map)
 
 void	ft_pacman_dw(t_map *map)
 {
-	if (ft_can_move(map->map[map->pacman->x + 1][map->pacman->y]) == 1 && \
+	if (ft_can_player(map->map[map->pacman->x + 1][map->pacman->y]) == 1 && \
 			map->t_img == 0)
 	{
 		map->map[map->pacman->x][map->pacman->y] = '2';
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
 		map->img->back_g, map->pacman->y * SIZE, map->pacman->x * SIZE);
-		ft_put_new_i(map, map->pacman->x + 1, map->pacman->y, \
+		ft_new_i(map, map->pacman->x + 1, map->pacman->y, \
 						map->img->pacman_open_dw);
 		map->pacman->x++;
 		map->t_img = 1;
 	}
-	else if (ft_can_move(map->map[map->pacman->x + 1][map->pacman->y]) == 1 && \
+	else if (ft_can_player(map->map[map->pacman->x + 1][map->pacman->y]) == 1 && \
 			map->t_img == 1)
 	{
 		map->map[map->pacman->x][map->pacman->y] = '2';
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
 		map->img->back_g, map->pacman->y * SIZE, map->pacman->x * SIZE);
-		ft_put_new_i(map, map->pacman->x + 1, map->pacman->y, \
+		ft_new_i(map, map->pacman->x + 1, map->pacman->y, \
 						map->img->pacman_dw);
 		map->pacman->x++;
 		map->t_img = 0;
@@ -92,24 +92,24 @@ void	ft_pacman_dw(t_map *map)
 
 void	ft_pacman_up(t_map *map)
 {
-	if (ft_can_move(map->map[map->pacman->x - 1][map->pacman->y]) == 1 && \
+	if (ft_can_player(map->map[map->pacman->x - 1][map->pacman->y]) == 1 && \
 			map->t_img == 0)
 	{
 		map->map[map->pacman->x][map->pacman->y] = '2';
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
 		map->img->back_g, map->pacman->y * SIZE, map->pacman->x * SIZE);
-		ft_put_new_i(map, map->pacman->x - 1, map->pacman->y, \
+		ft_new_i(map, map->pacman->x - 1, map->pacman->y, \
 						map->img->pacman_open_up);
 		map->pacman->x--;
 		map->t_img = 1;
 	}
-	else if (ft_can_move(map->map[map->pacman->x - 1][map->pacman->y]) == 1 && \
+	else if (ft_can_player(map->map[map->pacman->x - 1][map->pacman->y]) == 1 && \
 			map->t_img == 1)
 	{
 		map->map[map->pacman->x][map->pacman->y] = '2';
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
 		map->img->back_g, map->pacman->y * SIZE, map->pacman->x * SIZE);
-		ft_put_new_i(map, map->pacman->x - 1, map->pacman->y, \
+		ft_new_i(map, map->pacman->x - 1, map->pacman->y, \
 						map->img->pacman_up);
 		map->pacman->x--;
 		map->t_img = 0;

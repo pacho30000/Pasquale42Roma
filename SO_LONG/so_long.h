@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 19:54:09 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/23 04:35:58 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/24 03:12:32 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_map
 	int				frames;
 	char			*max_line;
 	char			**map;
+	char			**enemy;
 	void			*mlx_ptr;
 	void			*window;
 	t_sprite		*pacman;
@@ -72,6 +73,8 @@ int			ft_content_map(t_map *map, t_control_obj *obj);
 int			ft_count_element(t_map *map, t_control_obj *obj);
 int			ft_move_pacman(int key, t_map *map);
 int			ft_can_move(char c);
+int			ft_see_enemy(t_map *map, int x, int y);
+int			ft_can_enemy(t_map *map, int x, int y);
 void		ft_creating_map(t_map *map);
 void		ft_img(t_map *map);
 void		ft_fill_to_img_red(t_img *img, void *mlx_ptr);
@@ -84,13 +87,14 @@ void		ft_animate_pink(t_map *map);
 void		ft_fill_to_img_blu(t_img *img, void *mlx_ptr);
 void		ft_animate_blu(t_map *map);
 void		ft_fill_to_img_pacman(t_img *img, void *mlx_ptr);
+int			ft_can_player(char c);
 void		ft_pacman_up(t_map *map);
 void		ft_pacman_dw(t_map *game);
 void		ft_pacman_dx(t_map *game);
 void		ft_pacman_sx(t_map *game);
 void		ft_move(t_map *map);
-void		ft_print_map_in_shell(t_map *map);
-void		ft_put_new_i(t_map *map, int x, int y, void *img);
+void		ft_print_map_in_shell(t_map *map, char **print);
+void		ft_new_i(t_map *map, int x, int y, void *img);
 void		ft_put_back_enemy(t_map *map, int x, int y);
 void		ft_temp_animate(void);
 void		ft_move_red_x(t_map *map);

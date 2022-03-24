@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 06:20:00 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/23 05:06:55 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/24 05:19:02 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 
 static void	ft_move_noblock(t_map *map)
 {
-	if (ft_can_move(map->map[map->pink->x - 1][map->pink->y]) == 1)
+	if (ft_can_enemy(map, map->pink->x - 1, map->pink->y) == 1)
 	{
 		ft_put_back_enemy(map, map->pink->x, map->pink->y);
-		ft_put_new_i(map, map->pink->x - 1, map->pink->y, \
+		ft_new_i(map, map->pink->x - 1, map->pink->y, \
 					map->img->pink_up);
-		map->map[map->pink->x - 1][map->pink->y] = 'N';
 		map->pink->x--;
 	}
-	if (ft_can_move(map->map[map->pink->x][map->pink->y - 1]) == 1)
+	if (ft_can_enemy(map, map->pink->x, map->pink->y + 1) == 1)
 	{
 		ft_put_back_enemy(map, map->pink->x, map->pink->y);
-		ft_put_new_i(map, map->pink->x, map->pink->y - 1, map->img->pink_sx);
-		map->map[map->pink->x][map->pink->y - 1] = 'N';
-		map->pink->y--;
+		ft_new_i(map, map->pink->x, map->pink->y + 1, map->img->pink_dx);
+		map->pink->y++;
 	}
 }
 
@@ -35,42 +33,42 @@ void	ft_move_pink_y(t_map *map)
 {
 	if (map->pacman->y < map->pink->y)
 	{
-		if (ft_can_move(map->map[map->pink->x][map->pink->y - 1]) == 1)
+		if (ft_can_enemy(map, map->pink->x, map->pink->y - 1) == 1)
 		{
 			ft_put_back_enemy(map, map->pink->x, map->pink->y);
-			ft_put_new_i(map, map->pink->x, map->pink->y - 1, map->img->pink_sx);
-			map->map[map->pink->x][map->pink->y - 1] = 'N';
+			ft_new_i(map, map->pink->x, map->pink->y - 1, map->img->pink_sx);
 			map->pink->y--;
+			// map->enemy[map->pink->x][map->pink->y] = 'P';
 		}
 		else
 			ft_move_noblock(map);
 	}
 	else if (map->pacman->y > map->pink->y)
 	{
-		if (ft_can_move(map->map[map->pink->x][map->pink->y + 1]) == 1)
+		if (ft_can_enemy(map, map->pink->x, map->pink->y + 1) == 1)
 		{
 			ft_put_back_enemy(map, map->pink->x, map->pink->y);
-			ft_put_new_i(map, map->pink->x, map->pink->y + 1, \
-					map->img->pink_dx);
-			map->map[map->pink->x][map->pink->y + 1] = 'N';
+			ft_new_i(map, map->pink->x, map->pink->y + 1, map->img->pink_dx);
 			map->pink->y++;
+			// map->enemy[map->pink->x][map->pink->y] = 'P';
 		}
 		else
 			ft_move_noblock(map);
 	}
+	else
+		ft_move_noblock(map);
 }
 
 void	ft_move_pink_x(t_map *map)
 {
 	if (map->pacman->x < map->pink->x)
 	{
-		if (ft_can_move(map->map[map->pink->x - 1][map->pink->y]) == 1)
+		if (ft_can_enemy(map, map->pink->x - 1, map->pink->y) == 1)
 		{
 			ft_put_back_enemy(map, map->pink->x, map->pink->y);
-			ft_put_new_i(map, map->pink->x - 1, map->pink->y, \
-					map->img->pink_up);
-			map->map[map->pink->x - 1][map->pink->y] = 'N';
+			ft_new_i(map, map->pink->x - 1, map->pink->y, map->img->pink_up);
 			map->pink->x--;
+			// map->enemy[map->pink->x][map->pink->y] = 'P';
 		}
 		else
 			ft_move_pink_y(map);
@@ -79,13 +77,12 @@ void	ft_move_pink_x(t_map *map)
 		ft_move_pink_y(map);
 	else if (map->pacman->x > map->pink->x)
 	{
-		if (ft_can_move(map->map[map->pink->x + 1][map->pink->y]) == 1)
+		if (ft_can_enemy(map, map->pink->x + 1, map->pink->y) == 1)
 		{
 			ft_put_back_enemy(map, map->pink->x, map->pink->y);
-			ft_put_new_i(map, map->pink->x + 1, map->pink->y, \
-					map->img->pink_dw);
-			map->map[map->pink->x + 1][map->pink->y] = 'N';
+			ft_new_i(map, map->pink->x + 1, map->pink->y, map->img->pink_dw);
 			map->pink->x++;
+			// map->enemy[map->pink->x][map->pink->y] = 'P';
 		}
 		else
 			ft_move_pink_y(map);

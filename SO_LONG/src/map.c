@@ -6,13 +6,13 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:01:58 by aanghel           #+#    #+#             */
-/*   Updated: 2022/03/22 22:49:23 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/24 05:12:43 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	ft_fill_matrix(t_map *map)
+void	ft_fill_matrix(t_map *map, char **matrice)
 {
 	int	x;
 	int	s;
@@ -27,9 +27,9 @@ void	ft_fill_matrix(t_map *map)
 		while (y <= map->w)
 		{
 			if (map->max_line[s] != '\n')
-				map->map[x][y] = map->max_line[s];
+				matrice[x][y] = map->max_line[s];
 			else
-				map->map[x][y] = '\0';
+				matrice[x][y] = '\0';
 			s++;
 			y++;
 		}
@@ -38,7 +38,7 @@ void	ft_fill_matrix(t_map *map)
 	free(map->max_line);
 }
 
-void	ft_print_map_in_shell(t_map *map)
+void	ft_print_map_in_shell(t_map *map, char **print)
 {
 	int	i;
 	int	j;
@@ -48,25 +48,22 @@ void	ft_print_map_in_shell(t_map *map)
 	while (i < map->h)
 	{
 		j = 0;
-		while (map->map[i][j] != '\0')
+		while (print[i][j] != '\0')
 		{
-			ft_printf(" %c", map->map[i][j]);
+			ft_printf(" %c", print[i][j]);
 			j++;
 		}
-		if (map->map[i][j] == '\0')
+		if (print[i][j] == '\0')
 			ft_printf("\n");
 		i++;
 	}
 }
 
-void	ft_creating_map(t_map *map)
+void	ft_malloc_matrix(t_map *map, int i)
 {
-	int	i;
-
-	i = 0;
-	map->w = map->w - 1;
 	map->map = malloc(map->h * sizeof(char *));
-	if (!map->map)
+	map->enemy = malloc(map->h * sizeof(char *));
+	if (!map->map || !map->enemy)
 		return ;
 	while (i < map->h)
 	{
@@ -78,8 +75,28 @@ void	ft_creating_map(t_map *map)
 		}
 		i++;
 	}
-	ft_fill_matrix(map);
-	ft_print_map_in_shell(map);
+	i = 0;
+	while (i < map->h)
+	{
+		map->enemy[i] = (char *)malloc(sizeof(char) * (map->w - 1));
+		if (!map->enemy[i])
+		{
+			free(map->enemy);
+			return ;
+		}
+		i++;
+	}
+}
+
+void	ft_creating_map(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	map->w = map->w - 1;
+	ft_malloc_matrix(map, i);
+	ft_fill_matrix(map, map->map);
+	ft_print_map_in_shell(map, map->enemy);
 	map->mlx_ptr = mlx_init();
 	map->window = mlx_new_window(map->mlx_ptr, map->w * SIZE, \
 					map->h * SIZE, "42 PacMan by Pcatapan");

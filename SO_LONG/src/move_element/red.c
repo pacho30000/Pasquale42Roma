@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 03:20:38 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/24 03:08:56 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/24 07:07:41 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_move_noblock(t_map *map)
 
 void	ft_move_red_y(t_map *map)
 {
-	if (map->pacman->y < map->red->y)
+	if (map->pacman->y > map->red->y)
 	{
 		if (ft_can_enemy(map, map->red->x, map->red->y - 1) == 1)
 		{
@@ -37,7 +37,7 @@ void	ft_move_red_y(t_map *map)
 		else
 			ft_move_noblock(map);
 	}
-	else if (map->pacman->y > map->red->y)
+	else if (map->pacman->y < map->red->y)
 	{
 		if (ft_can_enemy(map, map->red->x, map->red->y + 1) == 1)
 		{
@@ -52,7 +52,7 @@ void	ft_move_red_y(t_map *map)
 
 void	ft_move_red_x(t_map *map)
 {
-	if (map->pacman->x < map->red->x)
+	if (map->pacman->x > map->red->x)
 	{
 		if (ft_can_enemy(map, map->red->x - 1, map->red->y) == 1)
 		{
@@ -65,7 +65,7 @@ void	ft_move_red_x(t_map *map)
 	}
 	else if (map->pacman->x == map->red->x)
 		ft_move_red_y(map);
-	else if (map->pacman->x > map->red->x)
+	else if (map->pacman->x < map->red->x)
 	{
 		if (ft_can_enemy(map, map->red->x + 1, map->red->y) == 1)
 		{

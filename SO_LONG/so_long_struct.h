@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 04:08:45 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/23 04:38:55 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/24 07:11:33 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ typedef struct s_img
 	void	*blu_up;
 	void	*blu_sx;
 	void	*blu_dx;
-	void	*orange_dw;
-	void	*orange_up;
-	void	*orange_sx;
-	void	*orange_dx;
+	void	*oran_dw;
+	void	*oran_up;
+	void	*oran_sx;
+	void	*oran_dx;
 	void	*red_dw;
 	void	*red_up;
 	void	*red_sx;

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:01:58 by aanghel           #+#    #+#             */
-/*   Updated: 2022/03/24 06:07:55 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/24 07:02:05 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	ft_creating_map(t_map *map)
 	ft_print_map_in_shell(map, map->map);
 	map->mlx_ptr = mlx_init();
 	map->window = mlx_new_window(map->mlx_ptr, map->w * SIZE, \
-					map->h * SIZE, "42 PacMan by Pcatapan");
+					map->h * SIZE, "42 - FAKE PacMan by pcatapan");
 	ft_img(map);
 	return ;
 }

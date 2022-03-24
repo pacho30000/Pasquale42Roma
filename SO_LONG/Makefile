@@ -6,7 +6,7 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/18 07:28:35 by pcatapan          #+#    #+#              #
-#    Updated: 2022/03/22 22:18:41 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/03/24 06:13:58 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,4 +35,4 @@ fclean:	clean
 	rm -rf *.dSYM
 
 norm:
-	norminette -R ./src ./PRINTF
+	norminette -R ./src/*.c ./PRINTF

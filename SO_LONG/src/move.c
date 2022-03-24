@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 06:38:52 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/24 05:19:31 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/24 07:15:53 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,14 @@ int	ft_quit(t_map *map)
 
 void	ft_move_enemy(t_map *map)
 {
-	// ft_move_red_x(map);
 	ft_move_pink_x(map);
 	map->enemy[map->pink->x][map->pink->y] = 'P';
+	ft_move_blu_x(map);
+	map->enemy[map->blu->x][map->blu->y] = 'B';
+	// ft_move_orange_x(map);
+	// map->enemy[map->oran->x][map->oran->y] = 'O';
+	// ft_move_red_x(map);
+	// map->enemy[map->red->x][map->red->y] = 'R';
 }
 
 int	ft_animate(t_map *map)
@@ -52,7 +57,7 @@ int	ft_controll_key(int key, t_map *map)
 		ft_pacman_sx(map);
 	if (key == 53)
 		exit (0);
-	ft_print_map_in_shell(map, map->map);
+	// ft_print_map_in_shell(map, map->map);
 	ft_printf("\nMatrice nemico");
 	ft_print_map_in_shell(map, map->enemy);
 	if (map->object->enemy > 0)
@@ -74,7 +79,7 @@ void	ft_move(t_map *map)
 	if (map->object->enemy > 0)
 	{
 		// map->map[map->red->x][map->red->y] = '0';
-		// map->map[map->orange->x][map->orange->y] = '0';
+		// map->map[map->oran->x][map->oran->y] = '0';
 		// map->map[map->blu->x][map->blu->y] = '0';
 		// map->map[map->pink->x][map->pink->y] = '0';
 		//mlx_loop_hook(map->mlx_ptr, ft_animate, map);

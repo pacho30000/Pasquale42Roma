@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 19:54:09 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/24 03:12:32 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/24 07:17:10 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_map
 	t_sprite		*pacman;
 	t_sprite		*red;
 	t_sprite		*pink;
-	t_sprite		*orange;
+	t_sprite		*oran;
 	t_sprite		*blu;
 	t_img			*img;
 	t_control_obj	*object;
@@ -80,11 +80,13 @@ void		ft_img(t_map *map);
 void		ft_fill_to_img_red(t_img *img, void *mlx_ptr);
 void		ft_animate_red(t_map *map);
 void		ft_fill_to_img_orange(t_img *img, void *mlx_ptr);
+void		ft_move_orange_x(t_map *map);
 void		ft_animate_orange(t_map *map);
 void		ft_fill_to_img_pink(t_img *img, void *mlx_ptr);
 void		ft_move_pink_x(t_map *map);
 void		ft_animate_pink(t_map *map);
 void		ft_fill_to_img_blu(t_img *img, void *mlx_ptr);
+void		ft_move_blu_x(t_map *map);
 void		ft_animate_blu(t_map *map);
 void		ft_fill_to_img_pacman(t_img *img, void *mlx_ptr);
 int			ft_can_player(char c);

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 21:53:16 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/22 21:25:22 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/24 07:01:02 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_check_lateral_walls(t_map *map, int i, int k)
 	{
 		if (map->max_line[map->w * j] != '1')
 		{
-			ft_printf("\x1b[31m%s\n", "The last colum isn't all walls!");
+			ft_printf("\x1b[31m%s\n", "ERROR: The first colum isn't all walls!");
 			return (0);
 		}
 		j++;
@@ -29,9 +29,9 @@ int	ft_check_lateral_walls(t_map *map, int i, int k)
 	j = 1;
 	while (j < map->h)
 	{
-		if (map->max_line[(k + 1) - (map->w * j)] != '1')
+		if (map->max_line[(k + map->w) - 1 - (map->w * j)] != '1')
 		{
-			ft_printf("\x1b[31m%s\n", "The first colum isn't all walls!");
+			ft_printf("\x1b[31m%s\n", "ERROR :The last colum isn't all walls!");
 			return (0);
 		}
 		j++;
@@ -49,7 +49,7 @@ int	ft_check_maps_walls(t_map *map)
 	{
 		if (map->max_line[i] != '1')
 		{
-			ft_printf("\x1b[31m%s\n", "The first row isn't all walls!");
+			ft_printf("\x1b[31m%s\n", "ERROR: The first row isn't all walls!");
 			return (0);
 		}
 		i++;
@@ -71,22 +71,22 @@ int	ft_count_element(t_map *map, t_control_obj *obj)
 {
 	if (obj->player != 1)
 	{
-		ft_printf("\x1b[31m%s\n", "Problem with palyer!");
+		ft_printf("\x1b[31m%s\n", "ERROR: Problem with palyer!");
 		return (0);
 	}
 	if (obj->coin == 0)
 	{
-		ft_printf("\x1b[31m%s\n", "The min coin is one!");
+		ft_printf("\x1b[31m%s\n", "ERROR: The min coin is one!");
 		return (0);
 	}
 	if (obj->enemy != 4 && obj->enemy != 0)
 	{
-		ft_printf (RED"%s\n", "Sorry bro this write for 4 enemy!");
+		ft_printf (RED"%s\n", "ERROE: Sorry bro this write for 4 enemy!");
 		return (0);
 	}
 	if (obj->exit == 0)
 	{
-		ft_printf("\x1b[31m%s\n", "The min of exit is one!");
+		ft_printf("\x1b[31m%s\n", "ERROR: The min of exit is one!");
 		return (0);
 	}
 	return (1);
@@ -114,7 +114,7 @@ int	ft_content_map(t_map *map, t_control_obj *obj)
 		else if (!(map->max_line[i] == '1' || map->max_line[i] == '0'
 				|| map->max_line[i] == '\n'))
 		{
-			ft_printf("\x1b[31m%s\n", "Error find a charter not permised!");
+			ft_printf("\x1b[31m%s\n", "ERROE: find a charter not permised!");
 			return (0);
 		}
 	}

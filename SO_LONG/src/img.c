@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 00:32:18 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/23 04:47:41 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/24 07:14:03 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	ft_put_img_enemy(t_map *map, int temp, int x, int y)
 	if (temp == 3)
 	{
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-								map->img->orange_dw, y * SIZE, x * SIZE);
-		map->orange->x = x;
-		map->orange->y = y;
+								map->img->oran_dw, y * SIZE, x * SIZE);
+		map->oran->x = x;
+		map->oran->y = y;
 	}
 	if (temp == 2)
 	{
@@ -98,7 +98,7 @@ void	ft_img(t_map *map)
 	map->red = malloc(sizeof(t_sprite));
 	map->pink = malloc(sizeof(t_sprite));
 	map->blu = malloc(sizeof(t_sprite));
-	map->orange = malloc(sizeof(t_sprite));
+	map->oran = malloc(sizeof(t_sprite));
 	ft_fill_to_img_red(map->img, map->mlx_ptr);
 	ft_fill_to_img_orange(map->img, map->mlx_ptr);
 	ft_fill_to_img_pink(map->img, map->mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 19:54:09 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/24 07:17:10 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:27:13 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,12 @@
 # define RED "\x1b[31m"
 # define GREEN "\x1b[32m"
 # define SIZE	48
-# define UP 1
-# define DW -1
-# define DX 2
-# define SX -2
 
 typedef struct s_sprite
 {
-	int			x;
-	int			y;
-	int			direction;
+	int	x;
+	int	y;
+	int	dir;
 }	t_sprite;
 
 typedef struct s_control_obj
@@ -48,14 +44,13 @@ typedef struct s_map
 	int				w;
 	int				moves;
 	int				t_img;
-	int				frames;
+	int				death;
 	char			*max_line;
 	char			**map;
 	char			**enemy;
 	void			*mlx_ptr;
 	void			*window;
 	t_sprite		*pacman;
-	t_sprite		*red;
 	t_sprite		*pink;
 	t_sprite		*oran;
 	t_sprite		*blu;
@@ -77,10 +72,7 @@ int			ft_see_enemy(t_map *map, int x, int y);
 int			ft_can_enemy(t_map *map, int x, int y);
 void		ft_creating_map(t_map *map);
 void		ft_img(t_map *map);
-void		ft_fill_to_img_red(t_img *img, void *mlx_ptr);
-void		ft_animate_red(t_map *map);
-void		ft_fill_to_img_orange(t_img *img, void *mlx_ptr);
-void		ft_move_orange_x(t_map *map);
+void		ft_move_oran_x(t_map *map);
 void		ft_animate_orange(t_map *map);
 void		ft_fill_to_img_pink(t_img *img, void *mlx_ptr);
 void		ft_move_pink_x(t_map *map);
@@ -100,8 +92,11 @@ void		ft_new_i(t_map *map, int x, int y, void *img);
 void		ft_put_back_enemy(t_map *map, int x, int y);
 void		ft_temp_animate(void);
 void		ft_move_red_x(t_map *map);
+void		ft_game_over(t_map *map);
 
 //Temporanea
 int			ft_quit(t_map *map);
+void		ft_move_oran(t_map *map);
+void		ft_move_pink(t_map *map);
 
 #endif

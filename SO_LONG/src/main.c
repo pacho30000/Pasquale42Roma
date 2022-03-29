@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 19:59:37 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/24 06:57:25 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:27:43 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	main(int argc, char **argv)
 	t_map	map;
 
 	map.h = 0;
+	map.death = 0;
 	map.object = malloc(sizeof(t_control_obj));
 	if (ft_checker(argc, argv, &map) == 0)
 		return (0);

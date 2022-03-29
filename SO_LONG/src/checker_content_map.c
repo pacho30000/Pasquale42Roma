@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 21:53:16 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/24 07:01:02 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/29 20:26:43 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ int	ft_count_element(t_map *map, t_control_obj *obj)
 		ft_printf("\x1b[31m%s\n", "ERROR: The min coin is one!");
 		return (0);
 	}
-	if (obj->enemy != 4 && obj->enemy != 0)
+	if (obj->enemy != 3 && obj->enemy != 0)
 	{
-		ft_printf (RED"%s\n", "ERROE: Sorry bro this write for 4 enemy!");
+		ft_printf (RED"%s\n", "ERROE: Sorry bro this write for 3 enemy!");
 		return (0);
 	}
 	if (obj->exit == 0)

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 06:23:09 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/24 03:08:37 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:38:14 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_pacman_dx(t_map *map)
 	map->pacman->y++;
 	map->t_img = 0;
 	}
+	map->moves++;
 }
 
 void	ft_pacman_sx(t_map *map)
@@ -51,8 +52,8 @@ void	ft_pacman_sx(t_map *map)
 		map->pacman->y--;
 		map->t_img = 1;
 	}
-	else if (ft_can_player(map->map[map->pacman->x][map->pacman->y - 1]) == 1 && \
-			map->t_img == 1)
+	else if (ft_can_player(map->map[map->pacman->x][map->pacman->y - 1]) == 1 \
+			&& map->t_img == 1)
 	{
 		map->map[map->pacman->x][map->pacman->y] = '2';
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
@@ -62,6 +63,7 @@ void	ft_pacman_sx(t_map *map)
 		map->pacman->y--;
 		map->t_img = 0;
 	}
+	map->moves++;
 }
 
 void	ft_pacman_dw(t_map *map)
@@ -77,8 +79,8 @@ void	ft_pacman_dw(t_map *map)
 		map->pacman->x++;
 		map->t_img = 1;
 	}
-	else if (ft_can_player(map->map[map->pacman->x + 1][map->pacman->y]) == 1 && \
-			map->t_img == 1)
+	else if (ft_can_player(map->map[map->pacman->x + 1][map->pacman->y]) == 1 \
+				&& map->t_img == 1)
 	{
 		map->map[map->pacman->x][map->pacman->y] = '2';
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
@@ -88,6 +90,7 @@ void	ft_pacman_dw(t_map *map)
 		map->pacman->x++;
 		map->t_img = 0;
 	}
+	map->moves++;
 }
 
 void	ft_pacman_up(t_map *map)
@@ -103,8 +106,8 @@ void	ft_pacman_up(t_map *map)
 		map->pacman->x--;
 		map->t_img = 1;
 	}
-	else if (ft_can_player(map->map[map->pacman->x - 1][map->pacman->y]) == 1 && \
-			map->t_img == 1)
+	else if (ft_can_player(map->map[map->pacman->x - 1][map->pacman->y]) == 1 \
+			&& map->t_img == 1)
 	{
 		map->map[map->pacman->x][map->pacman->y] = '2';
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
@@ -114,6 +117,7 @@ void	ft_pacman_up(t_map *map)
 		map->pacman->x--;
 		map->t_img = 0;
 	}
+	map->moves++;
 }
 
 void	ft_fill_to_img_pacman(t_img *img, void *mlx_ptr)

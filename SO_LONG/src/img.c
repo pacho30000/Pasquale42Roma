@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 00:32:18 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/24 07:14:03 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:28:37 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 int	ft_put_img_enemy(t_map *map, int temp, int x, int y)
 {
-	if (temp == 4)
+	if (temp == 3)
 	{
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
 								map->img->pink_dw, y * SIZE, x * SIZE);
 		map->pink->x = x;
 		map->pink->y = y;
 	}
-	if (temp == 3)
+	if (temp == 2)
 	{
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
 								map->img->oran_dw, y * SIZE, x * SIZE);
 		map->oran->x = x;
 		map->oran->y = y;
 	}
-	if (temp == 2)
+	if (temp == 1)
 	{
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
 								map->img->blu_dw, y * SIZE, x * SIZE);
@@ -76,12 +76,12 @@ void	ft_put_img(t_map *map, t_img *img)
 		{
 			if (map->map[x][y] == 'N')
 			{
-				if (temp == 1)
+				if (temp == 3)
 				{
 					mlx_put_image_to_window(map->mlx_ptr, map->window, \
-										map->img->red_dw, y * SIZE, x * SIZE);
-					map->red->x = x;
-					map->red->y = y;
+								map->img->pink_dw, y * SIZE, x * SIZE);
+					map->pink->x = x;
+					map->pink->y = y;
 				}
 				temp = ft_put_img_enemy(map, temp, x, y);
 			}
@@ -90,16 +90,25 @@ void	ft_put_img(t_map *map, t_img *img)
 	}
 }
 
+void	ft_fill_to_img_orange(t_img *img, void *mlx_ptr)
+{
+	img->oran_dw = mlx_xpm_file_to_image(mlx_ptr, ORANGE_DW_1, \
+		&img->w, &img->h);
+	img->oran_dx = mlx_xpm_file_to_image(mlx_ptr, ORANGE_DX_1, \
+	&img->w, &img->h);
+	img->oran_sx = mlx_xpm_file_to_image(mlx_ptr, ORANGE_SX_1, \
+	&img->w, &img->h);
+	img->oran_up = mlx_xpm_file_to_image(mlx_ptr, ORANGE_UP_1, \
+	&img->w, &img->h);
+}
+
 void	ft_img(t_map *map)
 {
-	map->frames = 0;
 	map->img = malloc(sizeof(t_img));
 	map->pacman = malloc(sizeof(t_sprite));
-	map->red = malloc(sizeof(t_sprite));
 	map->pink = malloc(sizeof(t_sprite));
 	map->blu = malloc(sizeof(t_sprite));
 	map->oran = malloc(sizeof(t_sprite));
-	ft_fill_to_img_red(map->img, map->mlx_ptr);
 	ft_fill_to_img_orange(map->img, map->mlx_ptr);
 	ft_fill_to_img_pink(map->img, map->mlx_ptr);
 	ft_fill_to_img_blu(map->img, map->mlx_ptr);

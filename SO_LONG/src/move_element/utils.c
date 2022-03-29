@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 08:12:07 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/24 05:14:34 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:34:32 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ void	ft_put_back_enemy(t_map *map, int x, int y)
 		map->enemy[x][y] = '0';
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
 					map->img->back_g, y * SIZE, x * SIZE);
+	}
+	else if (map->map[x][y] == 'E')
+	{
+		map->enemy[x][y] = '0';
+		mlx_put_image_to_window(map->mlx_ptr, map->window, \
+					map->img->back_g, y * SIZE, x * SIZE);
+		mlx_put_image_to_window(map->mlx_ptr, map->window, \
+					map->img->exit, y * SIZE, x * SIZE);
 	}
 	else
 	{
@@ -54,7 +62,11 @@ int	ft_can_enemy(t_map *map, int x, int y)
 
 	c = map->enemy[x][y];
 	if (c == '1' || c == 'R' || c == 'B' || c == 'O' || c == 'P' || c == 'N')
+	{
+		if (c == 'P')
+			ft_game_over(map);
 		return (0);
+	}
 	return (1);
 }
 

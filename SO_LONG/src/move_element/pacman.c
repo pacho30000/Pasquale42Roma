@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 06:23:09 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/29 21:38:14 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/04/01 02:00:40 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_pacman_dx(t_map *map)
 	map->pacman->y++;
 	map->t_img = 0;
 	}
+	map->map[map->pacman->x][map->pacman->y] = 'M';
 	map->moves++;
 }
 
@@ -63,6 +64,7 @@ void	ft_pacman_sx(t_map *map)
 		map->pacman->y--;
 		map->t_img = 0;
 	}
+	map->map[map->pacman->x][map->pacman->y] = 'M';
 	map->moves++;
 }
 
@@ -90,6 +92,7 @@ void	ft_pacman_dw(t_map *map)
 		map->pacman->x++;
 		map->t_img = 0;
 	}
+	map->map[map->pacman->x][map->pacman->y] = 'M';
 	map->moves++;
 }
 
@@ -117,6 +120,7 @@ void	ft_pacman_up(t_map *map)
 		map->pacman->x--;
 		map->t_img = 0;
 	}
+	map->map[map->pacman->x][map->pacman->y] = 'M';
 	map->moves++;
 }
 

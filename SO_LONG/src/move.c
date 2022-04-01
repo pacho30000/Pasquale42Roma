@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 06:38:52 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/29 21:37:06 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/04/01 02:12:12 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ ESC(53)--- Invio(36) --- Tab(49)
 */
 int	ft_controll_key(int key, t_map *map)
 {
+	map->map[map->pacman->x][map->pacman->y] = '0';
 	if (map->death == 1)
 		exit (0);
 	if (key == 13 || key == 126)
@@ -48,9 +49,9 @@ int	ft_controll_key(int key, t_map *map)
 	ft_printf("MOVES : %d\n", map->moves);
 	if (key == 53)
 		exit (0);
-	map->enemy[map->pacman->x][map->pacman->y] = 'P';
 	if (map->object->enemy > 0)
 		ft_move_enemy(map);
+	ft_print_map_in_shell(map, map->enemy);
 	return (0);
 }
 
@@ -60,7 +61,6 @@ void	ft_move(t_map *map)
 	map->oran->dir = 0;
 	map->blu->dir = 0;
 	map->moves = 0;
-	map->map[map->pacman->x][map->pacman->y] = '0';
 	map->enemy[map->pacman->x][map->pacman->y] = '0';
 	mlx_do_key_autorepeaton(map->mlx_ptr);
 	mlx_hook(map->window, 2, 1L << 0, &ft_controll_key, map);

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 08:12:07 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/29 21:34:32 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/04/01 02:09:00 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,13 @@ int	ft_can_enemy(t_map *map, int x, int y)
 	char	c;
 
 	c = map->enemy[x][y];
-	if (c == '1' || c == 'R' || c == 'B' || c == 'O' || c == 'P' || c == 'N')
+	if (map->map[x][y] == 'M')
 	{
-		if (c == 'P')
-			ft_game_over(map);
+		ft_game_over(map);
 		return (0);
 	}
+	if (c == '1' || c == 'R' || c == 'B' || c == 'O' || c == 'P' || c == 'N')
+		return (0);
 	return (1);
 }
 

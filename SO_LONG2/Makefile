@@ -5,40 +5,34 @@
 #                                                     +:+ +:+         +:+      #
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/05/04 18:02:04 by pcatapan          #+#    #+#              #
-#    Updated: 2022/05/04 18:02:05 by pcatapan         ###   ########.fr        #
+#    Created: 2022/03/18 07:28:35 by pcatapan          #+#    #+#              #
+#    Updated: 2022/05/04 20:55:20 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = so_long
 
-SRCS =	ft_printf.c \
-		ft_u.c \
-		ft_esa.c \
-		ft_putnbr.c \
-		ft_putesa.c \
-		ft_char.c \
+SRCS = ./src/*.c ./PRINTF/*.c ./src/element/*.c
 
-OBJS = ${SRCS:.c=.o}
-RM = rm -f
+OBJS = $(SRCS:.c=.o)
+
+CC = gcc
+
 FLAGS = -Wall -Wextra -Werror
-INCS = .
-LIBC = ar -rcs
 
-.c.o :
-	${CC} ${FLAGS} -c $< -o ${<:.c=.o} -I${INCS}
-	
-$(NAME) : ${OBJS}
-	${LIBC} ${NAME} ${OBJS}
-	
-all: $(NAME)
+KIT = -l mlx -framework openGL -framework AppKit
 
-fclean:  clean
-	$(RM) $(NAME)
-	
+
+$(NAME) :
+	$(CC) -g $(SRCS) $(KIT)
+
 clean:
-	$(RM) -f $(OBJS)
-	
-re: fclean all
+	rm -f $(OBJS)
 
-.PHONY: all clean fclean re .c.o
+fclean:	clean
+	rm -rf $(NAME) 
+	rm -rf a.*
+	rm -rf *.dSYM
+
+norm:
+	norminette -R ./src/*.c ./PRINTF

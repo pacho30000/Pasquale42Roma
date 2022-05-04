@@ -6,37 +6,37 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 00:32:18 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/29 21:28:37 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/05/04 17:28:02 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	ft_put_img_enemy(t_map *map, int temp, int x, int y)
-{
-	if (temp == 3)
-	{
-		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-								map->img->pink_dw, y * SIZE, x * SIZE);
-		map->pink->x = x;
-		map->pink->y = y;
-	}
-	if (temp == 2)
-	{
-		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-								map->img->oran_dw, y * SIZE, x * SIZE);
-		map->oran->x = x;
-		map->oran->y = y;
-	}
-	if (temp == 1)
-	{
-		mlx_put_image_to_window(map->mlx_ptr, map->window, \
-								map->img->blu_dw, y * SIZE, x * SIZE);
-		map->blu->x = x;
-		map->blu->y = y;
-	}
-	return ((temp - 1));
-}
+// int	ft_put_img_enemy(t_map *map, int temp, int x, int y)
+// {
+// 	if (temp == 3)
+// 	{
+// 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
+// 								map->img->pink_dw, y * SIZE, x * SIZE);
+// 		map->pink->x = x;
+// 		map->pink->y = y;
+// 	}
+// 	if (temp == 2)
+// 	{
+// 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
+// 								map->img->oran_dw, y * SIZE, x * SIZE);
+// 		map->oran->x = x;
+// 		map->oran->y = y;
+// 	}
+// 	if (temp == 1)
+// 	{
+// 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
+// 								map->img->blu_dw, y * SIZE, x * SIZE);
+// 		map->blu->x = x;
+// 		map->blu->y = y;
+// 	}
+// 	return ((temp - 1));
+// }
 
 void	ft_put_img_norma(t_map *map, int x, int y)
 {
@@ -65,26 +65,16 @@ void	ft_put_img(t_map *map, t_img *img)
 {
 	int	x;
 	int	y;
-	int	temp;
 
 	x = -1;
-	temp = map->object->enemy;
 	while (++x < map->h)
 	{
 		y = -1;
 		while (y++ < map->w)
 		{
 			if (map->map[x][y] == 'N')
-			{
-				if (temp == 3)
-				{
-					mlx_put_image_to_window(map->mlx_ptr, map->window, \
-								map->img->pink_dw, y * SIZE, x * SIZE);
-					map->pink->x = x;
-					map->pink->y = y;
-				}
-				temp = ft_put_img_enemy(map, temp, x, y);
-			}
+				mlx_put_image_to_window(map->mlx_ptr, map->window, \
+							map->img->oran_dw, y * SIZE, x * SIZE);
 			ft_put_img_norma(map, x, y);
 		}
 	}
@@ -106,12 +96,8 @@ void	ft_img(t_map *map)
 {
 	map->img = malloc(sizeof(t_img));
 	map->pacman = malloc(sizeof(t_sprite));
-	map->pink = malloc(sizeof(t_sprite));
-	map->blu = malloc(sizeof(t_sprite));
 	map->oran = malloc(sizeof(t_sprite));
 	ft_fill_to_img_orange(map->img, map->mlx_ptr);
-	ft_fill_to_img_pink(map->img, map->mlx_ptr);
-	ft_fill_to_img_blu(map->img, map->mlx_ptr);
 	ft_fill_to_img_pacman(map->img, map->mlx_ptr);
 	map->img->back_g = mlx_xpm_file_to_image(map->mlx_ptr, BACK_G, \
 									&map->img->w, &map->img->h);
@@ -125,3 +111,8 @@ void	ft_img(t_map *map)
 				EXIT, &map->img->w, &map->img->h);
 	ft_put_img(map, map->img);
 }
+
+// map->pink = malloc(sizeof(t_sprite));
+// map->blu = malloc(sizeof(t_sprite));
+//ft_fill_to_img_pink(map->img, map->mlx_ptr);
+//ft_fill_to_img_blu(map->img, map->mlx_ptr);

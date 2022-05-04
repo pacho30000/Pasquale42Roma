@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:01:58 by aanghel           #+#    #+#             */
-/*   Updated: 2022/05/04 17:11:32 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/05/04 19:50:48 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ void	ft_print_map_in_shell(t_map *map, char **print)
 void	ft_malloc_matrix(t_map *map, int i)
 {
 	map->map = malloc(map->h * sizeof(char *));
-	map->enemy = malloc(map->h * sizeof(char *));
-	if (!map->map || !map->enemy)
+	if (!map->map)
 		return ;
 	while (i < map->h)
 	{
@@ -75,16 +74,6 @@ void	ft_malloc_matrix(t_map *map, int i)
 		i++;
 	}
 	i = 0;
-	while (i < map->h)
-	{
-		map->enemy[i] = (char *)malloc(sizeof(char) * (map->w - 1));
-		if (!map->enemy[i])
-		{
-			free(map->enemy);
-			return ;
-		}
-		i++;
-	}
 }
 
 void	ft_creating_map(t_map *map)
@@ -95,11 +84,11 @@ void	ft_creating_map(t_map *map)
 	map->w = map->w - 1;
 	ft_malloc_matrix(map, i);
 	ft_fill_matrix(map, map->map);
-	ft_fill_matrix(map, map->enemy);
 	free(map->max_line);
 	map->mlx_ptr = mlx_init();
 	map->window = mlx_new_window(map->mlx_ptr, map->w * SIZE, \
 					map->h * SIZE, "42 - FAKE PacMan by pcatapan");
 	ft_img(map);
+	ft_printf("Trst\n");
 	return ;
 }

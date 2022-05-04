@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 08:12:07 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/04/01 02:09:00 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/05/04 17:55:53 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	ft_put_back_enemy(t_map *map, int x, int y)
 {
 	if (map->map[x][y] == '2' || map->map[x][y] == 'N')
 	{
-		map->enemy[x][y] = '0';
+		map->map[x][y] = '0';
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
 					map->img->back_g, y * SIZE, x * SIZE);
 	}
 	else if (map->map[x][y] == 'E')
 	{
-		map->enemy[x][y] = '0';
+		map->map[x][y] = '0';
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
 					map->img->back_g, y * SIZE, x * SIZE);
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
@@ -30,7 +30,7 @@ void	ft_put_back_enemy(t_map *map, int x, int y)
 	}
 	else
 	{
-		map->enemy[x][y] = '0';
+		map->map[x][y] = '0';
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
 					map->img->back_g, y * SIZE, x * SIZE);
 		mlx_put_image_to_window(map->mlx_ptr, map->window, \
@@ -60,13 +60,8 @@ int	ft_can_enemy(t_map *map, int x, int y)
 {
 	char	c;
 
-	c = map->enemy[x][y];
-	if (map->map[x][y] == 'M')
-	{
-		ft_game_over(map);
-		return (0);
-	}
-	if (c == '1' || c == 'R' || c == 'B' || c == 'O' || c == 'P' || c == 'N')
+	c = map->map[x][y];
+	if (c == '1' || c == 'N')
 		return (0);
 	return (1);
 }

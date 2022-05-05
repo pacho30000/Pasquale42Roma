@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 06:23:09 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/05/05 17:40:23 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/05/05 19:31:11 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ void	ft_player_dx(t_map *map)
 		ft_new_i(map, map->player->x, map->player->y + 1, \
 						map->img->player_r);
 		map->player->y++;
+		map->moves++;
+		ft_printf("MOVES : %d\n", map->moves);
 	}
 	map->map[map->player->x][map->player->y] = 'P';
-	map->moves++;
 }
 
 void	ft_player_sx(t_map *map)
@@ -39,9 +40,10 @@ void	ft_player_sx(t_map *map)
 		ft_new_i(map, map->player->x, map->player->y - 1, \
 						map->img->player_l);
 		map->player->y--;
+		map->moves++;
+		ft_printf("MOVES : %d\n", map->moves);
 	}
 	map->map[map->player->x][map->player->y] = 'P';
-	map->moves++;
 }
 
 void	ft_player_dw(t_map *map)
@@ -55,9 +57,10 @@ void	ft_player_dw(t_map *map)
 		ft_new_i(map, map->player->x + 1, map->player->y, \
 						map->img->player_r);
 		map->player->x++;
+		map->moves++;
+		ft_printf("MOVES : %d\n", map->moves);
 	}
 	map->map[map->player->x][map->player->y] = 'P';
-	map->moves++;
 }
 
 void	ft_player_up(t_map *map)
@@ -70,7 +73,8 @@ void	ft_player_up(t_map *map)
 		ft_new_i(map, map->player->x - 1, map->player->y, \
 						map->img->player_l);
 		map->player->x--;
+		map->moves++;
+		ft_printf("MOVES : %d\n", map->moves);
 	}
 	map->map[map->player->x][map->player->y] = 'P';
-	map->moves++;
 }

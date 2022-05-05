@@ -6,13 +6,13 @@
 #    By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/18 07:28:35 by pcatapan          #+#    #+#              #
-#    Updated: 2022/03/24 06:13:58 by pcatapan         ###   ########.fr        #
+#    Updated: 2022/05/05 18:14:36 by pcatapan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-SRCS = ./src/*.c ./PRINTF/*.c ./src/move_element/*.c
+SRCS = ./src/*.c ./PRINTF/*.c ./src/element/*.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -22,17 +22,20 @@ FLAGS = -Wall -Wextra -Werror
 
 KIT = -l mlx -framework openGL -framework AppKit
 
-
 $(NAME) :
-	$(CC) -g $(SRCS) $(KIT)
+	@$(CC) $(SRCS) $(FLAGS) $(KIT) -o $(NAME)
+
+all: $(NAME)
 
 clean:
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
 
 fclean:	clean
-	rm -rf $(NAME) 
-	rm -rf a.*
-	rm -rf *.dSYM
+	@rm -rf $(NAME) 
+	
+re: $(NAME)
 
 norm:
-	norminette -R ./src/*.c ./PRINTF
+	@norminette -R ./src/*.c ./PRINTF
+
+.PHONY : all clean fclean re

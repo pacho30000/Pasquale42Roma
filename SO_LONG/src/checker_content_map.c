@@ -6,13 +6,13 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 21:53:16 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/29 20:26:43 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:23:15 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	ft_check_lateral_walls(t_map *map, int i, int k)
+int	ft_check_lateral_walls(t_map *map, int k)
 {
 	int	j;
 
@@ -62,12 +62,12 @@ int	ft_check_maps_walls(t_map *map)
 			return (0);
 		k--;
 	}
-	if (ft_check_lateral_walls(map, i, k) == 0)
+	if (ft_check_lateral_walls(map, k) == 0)
 		return (0);
 	return (1);
 }
 
-int	ft_count_element(t_map *map, t_control_obj *obj)
+int	ft_count_element(t_control_obj *obj)
 {
 	if (obj->player != 1)
 	{
@@ -77,11 +77,6 @@ int	ft_count_element(t_map *map, t_control_obj *obj)
 	if (obj->coin == 0)
 	{
 		ft_printf("\x1b[31m%s\n", "ERROR: The min coin is one!");
-		return (0);
-	}
-	if (obj->enemy != 3 && obj->enemy != 0)
-	{
-		ft_printf (RED"%s\n", "ERROE: Sorry bro this write for 3 enemy!");
 		return (0);
 	}
 	if (obj->exit == 0)

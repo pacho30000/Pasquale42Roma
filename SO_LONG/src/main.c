@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 19:59:37 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/03/29 21:27:43 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/05/05 19:05:14 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,21 @@ int	ft_checker(int argc, char **argv, t_map *map)
 	int				i;
 
 	i = 0;
-	if (argc < 2)
+	if (argc != 2)
 	{
 		ft_printf("\x1b[31m%s\n", "ERROR : Invalid number of arguments!");
 		return (0);
 	}
-	while (argv[1][i] != '.')
+	while (argv[1][i] != '\0')
 		i++;
-	if (!(argv[1][i + 1] == 'b' && argv[1][i + 2] == 'e'
-			&& argv[1][i + 3] == 'r'))
+	if (!(argv[1][i - 4] == '.' && argv[1][i - 3] == 'b' \
+			&& argv[1][i - 2] == 'e' && argv[1][i - 1] == 'r'))
 	{
 		ft_printf("\x1b[31m%s\n", "ERROR : Invalid exstension map!");
 		return (0);
 	}
 	if (ft_checker_map(argv[1], map, map->object) == 0)
 		return (0);
-	ft_printf ("\nLa matrice é larga : %d", map->w);
-	ft_printf ("\nLa matrice é alta : %d\n", map->h);
 	return (1);
 }
 
@@ -49,10 +47,12 @@ int	main(int argc, char **argv)
 	t_map	map;
 
 	map.h = 0;
-	map.death = 0;
 	map.object = malloc(sizeof(t_control_obj));
 	if (ft_checker(argc, argv, &map) == 0)
+	{
+		free(map.object);
 		return (0);
+	}
 	ft_creating_map(&map);
 	ft_move(&map);
 	mlx_loop(map.mlx_ptr);

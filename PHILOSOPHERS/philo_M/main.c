@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:22:22 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/02 20:04:52 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/02 20:40:48 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_check_eat(t_philosophers *philo)
 			if (i == philo->istance->number_of_philosophers - 1)
 			{
 				pthread_mutex_lock(&philo->istance->mutex_write);
-				philo->istance->stop = false;
+				philo->istance->stop = 0;
 			}
 			i++;
 		}
@@ -42,7 +42,7 @@ void	ft_check_eat(t_philosophers *philo)
 /*
 Check that all philosophers aren't death.
 Lock the eating beacuse if one philosophers is death block all process
-The istance is false beaccuse in "main" exit of while
+The istance is 0 beaccuse in "main" exit of while
 */
 void	*ft_check_death(void *arg)
 {
@@ -57,7 +57,7 @@ void	*ft_check_death(void *arg)
 			pthread_mutex_lock(&philo->mutex_eating);
 			ft_message_shell(philo->istance, philo->philosophers_number, \
 							"died");
-			philo->istance->stop = false;
+			philo->istance->stop = 0;
 			pthread_mutex_unlock(&philo->mutex_eating);
 		}
 		if (philo->istance->number_philosopher_must_eat
@@ -143,7 +143,7 @@ int	main(int argc, char **argv)
 	istance.philosophers = ft_philosophers_start(&istance);
 	if (!istance.philosophers || !istance.forks)
 		return (0);
-	istance.stop = true;
+	istance.stop = 1;
 	ft_start_routin(&istance);
 	while (istance.stop)
 		continue ;

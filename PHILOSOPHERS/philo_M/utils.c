@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:49:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/02 18:18:57 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/02 20:35:20 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	ft_message_shell(t_main *istance, int philosophers_number, char *txt)
 
 int	ft_get_time(void)
 {
-	static struct timeval	tv;
+	static struct timeval	t;
 
-	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * (uint64_t)1000) + (tv.tv_usec / 1000));
+	gettimeofday(&t, NULL);
+	return ((t.tv_sec * (uint64_t)1000) + (t.tv_usec / 1000));
 }
 
 void	ft_usleep(uint64_t time_in_ms)

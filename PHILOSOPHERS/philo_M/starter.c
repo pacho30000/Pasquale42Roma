@@ -6,11 +6,11 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 19:37:47 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/02 02:53:07 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/02 20:05:28 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philosophers.h"
+#include "philosophers.h"
 
 int	ft_check_arguments(int argc, char **argv, t_main *istance)
 {
@@ -39,6 +39,9 @@ int	ft_check_arguments(int argc, char **argv, t_main *istance)
 	return (0);
 }
 
+/*
+Create the fork
+*/
 pthread_mutex_t	*ft_start_fork(t_main *istance)
 {
 	pthread_mutex_t	*forks;
@@ -56,6 +59,11 @@ pthread_mutex_t	*ft_start_fork(t_main *istance)
 	return (forks);
 }
 
+/*
+Create the philosophers.
+Only philosophers have two fork assigend, use the module beacuse
+when "i" is equal to number_of_philosophers the rest is 0
+*/
 t_philosophers	**ft_philosophers_start(t_main *istance)
 {
 	t_philosophers	**philo;
@@ -75,7 +83,7 @@ t_philosophers	**ft_philosophers_start(t_main *istance)
 			return (NULL);
 		philo[i]->philosophers_number = i;
 		philo[i]->istance = istance;
-		philo[i]->is_eating = 0;
+		philo[i]->is_eating = false;
 		philo[i]->count = 0;
 		philo[i]->left_fork = i;
 		philo[i]->right_fork = (i + 1) % istance->number_of_philosophers;
@@ -92,10 +100,10 @@ void	ft_take_fork(t_philosophers *philo)
 		"has taken the left and right fork");
 	pthread_mutex_lock(&philo->mutex_eating);
 	philo->last_eat = ft_get_time();
-	philo->is_eating = 1;
+	philo->is_eating = true;
 	ft_message_shell(philo->istance, philo->philosophers_number, "is eating");
 	ft_usleep(philo->istance->time_to_eat);
-	philo->is_eating = 0;
+	philo->is_eating = false;
 	philo->count++;
 	pthread_mutex_unlock(&philo->mutex_eating);
 }

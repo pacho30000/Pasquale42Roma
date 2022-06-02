@@ -6,11 +6,11 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:49:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/02 02:43:56 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:18:57 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philosophers.h"
+#include "philosophers.h"
 
 void	ft_error(t_main *istance)
 {

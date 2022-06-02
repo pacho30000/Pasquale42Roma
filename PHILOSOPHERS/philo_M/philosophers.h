@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:22:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/02 02:17:30 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/02 20:03:42 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_philosophers
 	int				count;
 	int				left_fork;
 	int				right_fork;
-	int				is_eating;
+	bool			is_eating;
 	pthread_mutex_t	mutex_eating;
 	struct s_main	*istance;
 }				t_philosophers;
@@ -46,7 +46,7 @@ typedef struct s_main
 	int				number_philosopher_must_eat;
 	int				error;
 	int				time;
-	int				stop;
+	bool			stop;
 	t_philosophers	**philosophers;
 	pthread_mutex_t	mutex_write;
 	pthread_mutex_t	*forks;

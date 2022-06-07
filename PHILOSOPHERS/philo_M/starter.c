@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 19:37:47 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/02 20:26:40 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/08 01:21:28 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	ft_check_arguments(int argc, char **argv, t_main *istance)
 		istance->error = ERROR_ARGUMENTS;
 		return (ERROR_ARGUMENTS);
 	}
+	if (istance->number_of_philosophers <= 0)
+		return (ERROR_ARGUMENTS);
 	istance->number_philosopher_must_eat = 0;
 	if (argc == 6)
 	{
@@ -66,8 +68,8 @@ when "i" is equal to number_of_philosophers the rest is 0
 */
 t_philosophers	**ft_philosophers_start(t_main *istance)
 {
-	t_philosophers	**philo;
 	int				i;
+	t_philosophers	**philo;
 
 	philo = (t_philosophers **)malloc(sizeof(t_philosophers *) * \
 									istance->number_of_philosophers);
@@ -95,14 +97,16 @@ t_philosophers	**ft_philosophers_start(t_main *istance)
 void	ft_take_fork(t_philosophers *philo)
 {
 	pthread_mutex_lock(&philo->istance->forks[philo->left_fork]);
+	ft_message_shell(philo->istance, philo->philosophers_number, \
+		"has taken the left");
 	pthread_mutex_lock(&philo->istance->forks[philo->right_fork]);
 	ft_message_shell(philo->istance, philo->philosophers_number, \
-		"has taken the left and right fork");
+		"has taken the right");
 	pthread_mutex_lock(&philo->mutex_eating);
 	philo->last_eat = ft_get_time();
 	philo->is_eating = 1;
 	ft_message_shell(philo->istance, philo->philosophers_number, "is eating");
-	ft_usleep(philo->istance->time_to_eat);
+	ft_usleep(philo->istance->time_to_eat, philo->istance->stop);
 	philo->is_eating = 0;
 	philo->count++;
 	pthread_mutex_unlock(&philo->mutex_eating);

@@ -2,13 +2,14 @@ NAME		= philo
 
 S = philo_M/
 
-SRC = 	$Smain \
-		$Sutils	\
-		$Sstarter	\
+SRC = 	$Smain.c \
+		$Sutils.c	\
+		$Sdestroy.c \
+		$Sstarter.c	\
 
 PROJECT_H	= $Sphilosophers.h
 
-OBJS = $(addsuffix .o, $(SRC))
+OBJS = $(SRC:%.c=%.o)
 
 RM = @rm -rf
 
@@ -17,8 +18,8 @@ CC			= gcc
 CC_FLAGS	= -Wall -Werror -Wextra
 
 
-$(NAME): $(OBJS)
-	@$(CC) -o $(NAME) $(OBJS) $(CC_FLAGS) $(PTHEAD_FLAG)
+$(NAME): $(SRC)
+	@$(CC) $(SRC) $(CC_FLAGS) $(PTHEAD_FLAG) -o $(NAME) 
 
 all: $(NAME)
 

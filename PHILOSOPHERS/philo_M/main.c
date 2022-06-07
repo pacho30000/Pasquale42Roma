@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:22:22 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/02 20:40:48 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/08 01:26:41 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	*ft_check_death(void *arg)
 		if (philo->istance->number_philosopher_must_eat
 			&& philo->count >= philo->istance->number_philosopher_must_eat)
 			ft_check_eat(philo);
-		ft_usleep(100);
 	}
 	return (NULL);
 }
@@ -80,6 +79,8 @@ void	*ft_routine(void *arg)
 	t_philosophers	*philo;
 
 	philo = ((t_philosophers *)arg);
+	if (philo->philosophers_number % 2)
+		ft_usleep(philo->istance->time_to_eat / 2, philo->istance->stop);
 	while (philo->istance->stop)
 	{
 		ft_take_fork(philo);
@@ -87,7 +88,7 @@ void	*ft_routine(void *arg)
 		pthread_mutex_unlock(&philo->istance->forks[philo->right_fork]);
 		ft_message_shell(philo->istance, philo->philosophers_number, \
 						"is sleeping");
-		ft_usleep(philo->istance->time_to_sleep);
+		ft_usleep(philo->istance->time_to_sleep, philo->istance->stop);
 		ft_message_shell(philo->istance, philo->philosophers_number, \
 						"is thinking");
 	}
@@ -109,7 +110,6 @@ void	ft_start_routin(t_main *istance)
 		pthread_create(&istance->philosophers[i]->philosophers_thread, NULL, \
 			ft_routine, (void *)istance->philosophers[i]);
 		i++;
-		usleep(100);
 	}
 	i = 0;
 	while (i < istance->number_of_philosophers)
@@ -117,7 +117,6 @@ void	ft_start_routin(t_main *istance)
 		pthread_create(&istance->philosophers[i]->check_death_philosophers, \
 			NULL, ft_check_death, (void *)istance->philosophers[i]);
 		i++;
-		usleep(100);
 	}
 }
 
@@ -147,4 +146,5 @@ int	main(int argc, char **argv)
 	ft_start_routin(&istance);
 	while (istance.stop)
 		continue ;
+	ft_destroy(&istance);
 }

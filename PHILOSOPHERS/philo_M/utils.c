@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:49:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/02 20:35:20 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/08 01:24:05 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,18 @@ int	ft_get_time(void)
 	return ((t.tv_sec * (uint64_t)1000) + (t.tv_usec / 1000));
 }
 
-void	ft_usleep(uint64_t time_in_ms)
+void	ft_usleep(uint64_t time_in_ms, int stop)
 {
 	uint64_t	start;
 
 	start = 0;
 	start = ft_get_time();
-	while ((ft_get_time() - start) < time_in_ms)
-		usleep(time_in_ms / 10);
+	while (stop)
+	{
+		if ((ft_get_time() - start) >= time_in_ms)
+			break ;
+		usleep(100);
+	}
 }
 
 int	ft_atoi(const char *str, int *par)

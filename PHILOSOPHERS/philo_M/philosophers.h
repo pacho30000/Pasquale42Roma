@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:22:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/02 20:27:33 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/08 01:22:05 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_main
 int				ft_atoi(const char *str, int *par);
 void			ft_error(t_main *istance);
 int				ft_get_time(void);
-void			ft_usleep(uint64_t time_in_ms);
+void			ft_usleep(uint64_t time_in_ms, int stop);
 void			ft_message_shell(t_main *istance, int philosophers_number, \
 								char *txt);
 
@@ -66,5 +66,8 @@ pthread_mutex_t	*ft_start_fork(t_main *istance);
 int				ft_check_arguments(int argc, char **argv, t_main *istance);
 void			ft_take_fork(t_philosophers *philo);
 t_main			*init(int ac, char **av);
+
+// Destroy.c
+void			ft_destroy(t_main *istance);
 
 #endif

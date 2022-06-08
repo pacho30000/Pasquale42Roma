@@ -6,27 +6,27 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:49:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/08 01:24:05 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/08 23:49:59 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	ft_error(t_main *istance)
+int	ft_check_arguments(int argc, char **argv)
 {
-	if (istance->error == ERROR_NUMBER_ARGUMENTS)
-		printf("Error with number of arguments!");
-	if (istance->error == ERROR_ARGUMENTS)
-		printf("Error the arguments have a invalid charter!");
-}
-
-void	ft_message_shell(t_main *istance, int philosophers_number, char *txt)
-{
-	pthread_mutex_lock(&istance->mutex_write);
-	printf("[%d]\tPhilosopher %d %s\n", ft_get_time() - istance->time,
-		philosophers_number + 1, txt);
-	if (txt[0] != 'd')
-		pthread_mutex_unlock(&istance->mutex_write);
+	if (argc < 5 || argc > 6)
+		return (ERROR_NUMBER_ARGUMENTS);
+	if (ft_atoi(argv[1]) || ft_atoi(argv[2]) \
+	|| ft_atoi(argv[3]) || ft_atoi(argv[4]))
+		return (ERROR_ARGUMENTS);
+	if (ft_convert(argv[1]) <= 0)
+		return (ERROE_ZERO);
+	if (argc == 6)
+	{
+		if (ft_atoi(argv[5]))
+			return (ERROR_ARGUMENTS);
+	}
+	return (0);
 }
 
 int	ft_get_time(void)
@@ -37,13 +37,13 @@ int	ft_get_time(void)
 	return ((t.tv_sec * (uint64_t)1000) + (t.tv_usec / 1000));
 }
 
-void	ft_usleep(uint64_t time_in_ms, int stop)
+void	ft_usleep(uint64_t time_in_ms)
 {
 	uint64_t	start;
 
 	start = 0;
 	start = ft_get_time();
-	while (stop)
+	while (1)
 	{
 		if ((ft_get_time() - start) >= time_in_ms)
 			break ;
@@ -51,7 +51,22 @@ void	ft_usleep(uint64_t time_in_ms, int stop)
 	}
 }
 
-int	ft_atoi(const char *str, int *par)
+int	ft_convert(const char *str)
+{
+	int	i;
+	int	num;
+
+	i = 0;
+	num = 0;
+	while (str[i] != '\0')
+	{
+		num = num * 10 + (str[i] - '0');
+		i++;
+	}
+	return (num);
+}
+
+int	ft_atoi(const char *str)
 {
 	int	i;
 	int	num;
@@ -65,6 +80,5 @@ int	ft_atoi(const char *str, int *par)
 		num = num * 10 + (str[i] - '0');
 		i++;
 	}
-	*par = num;
 	return (false);
 }

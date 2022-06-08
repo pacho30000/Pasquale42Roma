@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:22:22 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/08 20:30:35 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/08 23:50:48 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	*ft_routine(void *arg)
 
 	philo = ((t_philosophers *)arg);
 	if ((philo->philosophers_number + 1) % 2 == 0)
-		usleep(55000);
+		ft_usleep(55000);
 	while (ft_death(philo->istance))
 	{
 		ft_take_fork(philo);
@@ -96,7 +96,7 @@ void	*ft_routine(void *arg)
 		pthread_mutex_unlock(&philo->istance->forks[philo->right_fork]);
 		ft_message_shell(philo->istance, philo->philosophers_number, \
 						"is sleeping");
-		ft_usleep(philo->istance->time_to_sleep, philo->istance->stop);
+		ft_usleep(philo->istance->time_to_sleep);
 		ft_message_shell(philo->istance, philo->philosophers_number, \
 						"is thinking");
 	}

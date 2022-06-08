@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:22:22 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/08 01:26:41 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/09 01:31:26 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,15 @@ void	ft_check_eat(t_philosophers *philo)
 	pthread_mutex_lock(&philo->mutex_eating);
 	while (i < philo->istance->number_of_philosophers)
 	{
-		if (philo->istance->philosophers[i]->count >= \
+		if (ft_mutex_count(philo) >= \
 				philo->istance->number_philosopher_must_eat)
 		{
 			if (i == philo->istance->number_of_philosophers - 1)
 			{
 				pthread_mutex_lock(&philo->istance->mutex_write);
+				pthread_mutex_lock(&philo->istance->mutex_stop);
 				philo->istance->stop = 0;
+				pthread_mutex_unlock(&philo->istance->mutex_stop);
 			}
 			i++;
 		}
@@ -49,19 +51,22 @@ void	*ft_check_death(void *arg)
 	t_philosophers	*philo;
 
 	philo = ((t_philosophers *)arg);
-	while (philo->istance->stop)
+	while (ft_mutex_stop(philo->istance))
 	{
-		if (!(philo->is_eating)
-			&& ft_get_time() - philo->last_eat >= philo->istance->time_to_die)
+		if (!(ft_mutex_eating(philo))
+			&& ft_get_time() - ft_mutex_last_eat(philo) \
+						>= philo->istance->time_to_die)
 		{
 			pthread_mutex_lock(&philo->mutex_eating);
+			pthread_mutex_lock(&philo->istance->mutex_stop);
 			ft_message_shell(philo->istance, philo->philosophers_number, \
 							"died");
 			philo->istance->stop = 0;
+			pthread_mutex_unlock(&philo->istance->mutex_stop);
 			pthread_mutex_unlock(&philo->mutex_eating);
 		}
 		if (philo->istance->number_philosopher_must_eat
-			&& philo->count >= philo->istance->number_philosopher_must_eat)
+			&& ft_mutex_count(philo) >= philo->istance->number_philosopher_must_eat)
 			ft_check_eat(philo);
 	}
 	return (NULL);
@@ -80,15 +85,15 @@ void	*ft_routine(void *arg)
 
 	philo = ((t_philosophers *)arg);
 	if (philo->philosophers_number % 2)
-		ft_usleep(philo->istance->time_to_eat / 2, philo->istance->stop);
-	while (philo->istance->stop)
+		ft_usleep(philo->istance->time_to_eat);
+	while (ft_mutex_stop(philo->istance))
 	{
 		ft_take_fork(philo);
 		pthread_mutex_unlock(&philo->istance->forks[philo->left_fork]);
 		pthread_mutex_unlock(&philo->istance->forks[philo->right_fork]);
 		ft_message_shell(philo->istance, philo->philosophers_number, \
 						"is sleeping");
-		ft_usleep(philo->istance->time_to_sleep, philo->istance->stop);
+		ft_usleep(philo->istance->time_to_sleep);
 		ft_message_shell(philo->istance, philo->philosophers_number, \
 						"is thinking");
 	}
@@ -106,7 +111,9 @@ void	ft_start_routin(t_main *istance)
 	i = 0;
 	while (i < istance->number_of_philosophers)
 	{
+		pthread_mutex_lock(&istance->philosophers[i]->mutex_last_eat);
 		istance->philosophers[i]->last_eat = ft_get_time();
+		pthread_mutex_unlock(&istance->philosophers[i]->mutex_last_eat);
 		pthread_create(&istance->philosophers[i]->philosophers_thread, NULL, \
 			ft_routine, (void *)istance->philosophers[i]);
 		i++;
@@ -129,22 +136,19 @@ If the philosophers don't death the proces continue (148)
 */
 int	main(int argc, char **argv)
 {
-	t_main	istance;
+	t_main	*istance;
+	int		error;
 
-	if (ft_check_arguments(argc, argv, &istance) != 0)
-	{
-		ft_error(&istance);
+	error = ft_check_arguments(argc, argv);
+	if (ft_error(error) == 1)
 		return (0);
-	}
-	pthread_mutex_init(&istance.mutex_write, NULL);
-	istance.forks = ft_start_fork(&istance);
-	istance.time = ft_get_time();
-	istance.philosophers = ft_philosophers_start(&istance);
-	if (!istance.philosophers || !istance.forks)
-		return (0);
-	istance.stop = 1;
-	ft_start_routin(&istance);
-	while (istance.stop)
+	istance = ft_start(argc, argv);
+	pthread_mutex_lock(&istance->mutex_stop);
+	istance->stop = 1;
+	pthread_mutex_unlock(&istance->mutex_stop);
+	istance->time = ft_get_time();
+	ft_start_routin(istance);
+	while (ft_mutex_stop(istance))
 		continue ;
-	ft_destroy(&istance);
+	ft_destroy(istance);
 }

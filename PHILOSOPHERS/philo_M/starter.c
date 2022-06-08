@@ -6,39 +6,33 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 19:37:47 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/08 01:21:28 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/09 01:23:45 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_check_arguments(int argc, char **argv, t_main *istance)
+t_main	*ft_start(int argc, char **argv)
 {
-	if (argc < 5 || argc > 6)
-	{
-		istance->error = ERROR_NUMBER_ARGUMENTS;
-		return (ERROR_NUMBER_ARGUMENTS);
-	}
-	if (ft_atoi(argv[1], &istance->number_of_philosophers) \
-	|| ft_atoi(argv[2], &istance->time_to_die) \
-	|| ft_atoi(argv[3], &istance->time_to_eat) \
-	|| ft_atoi(argv[4], &istance->time_to_sleep))
-	{
-		istance->error = ERROR_ARGUMENTS;
-		return (ERROR_ARGUMENTS);
-	}
-	if (istance->number_of_philosophers <= 0)
-		return (ERROR_ARGUMENTS);
+	t_main	*istance;
+
+	istance = malloc(sizeof(t_main) * 1);
+	if (!istance)
+		return (NULL);
+	istance->number_of_philosophers = ft_convert(argv[1]);
+	istance->time_to_die = ft_convert(argv[2]);
+	istance->time_to_eat = ft_convert(argv[3]);
+	istance->time_to_sleep = ft_convert(argv[4]);
 	istance->number_philosopher_must_eat = 0;
 	if (argc == 6)
-	{
-		if (ft_atoi(argv[5], &istance->number_philosopher_must_eat))
-		{
-			istance->error = ERROR_ARGUMENTS;
-			return (ERROR_ARGUMENTS);
-		}
-	}
-	return (0);
+		istance->number_philosopher_must_eat = ft_convert(argv[5]);
+	pthread_mutex_init(&istance->mutex_write, NULL);
+	pthread_mutex_init(&istance->mutex_stop, NULL);
+	istance->forks = ft_start_fork(istance);
+	istance->philosophers = ft_philosophers_start(istance);
+	if (!istance->philosophers || !istance->forks)
+		return (0);
+	return (istance);
 }
 
 /*
@@ -83,6 +77,10 @@ t_philosophers	**ft_philosophers_start(t_main *istance)
 			return (NULL);
 		if (pthread_mutex_init(&philo[i]->mutex_eating, NULL))
 			return (NULL);
+		if (pthread_mutex_init(&philo[i]->mutex_last_eat, NULL))
+			return (NULL);
+		if (pthread_mutex_init(&philo[i]->mutex_count, NULL))
+			return (NULL);
 		philo[i]->philosophers_number = i;
 		philo[i]->istance = istance;
 		philo[i]->is_eating = 0;
@@ -103,11 +101,15 @@ void	ft_take_fork(t_philosophers *philo)
 	ft_message_shell(philo->istance, philo->philosophers_number, \
 		"has taken the right");
 	pthread_mutex_lock(&philo->mutex_eating);
+	pthread_mutex_lock(&philo->mutex_last_eat);
+	pthread_mutex_lock(&philo->mutex_count);
 	philo->last_eat = ft_get_time();
 	philo->is_eating = 1;
 	ft_message_shell(philo->istance, philo->philosophers_number, "is eating");
-	ft_usleep(philo->istance->time_to_eat, philo->istance->stop);
+	ft_usleep(philo->istance->time_to_eat);
 	philo->is_eating = 0;
 	philo->count++;
 	pthread_mutex_unlock(&philo->mutex_eating);
+	pthread_mutex_unlock(&philo->mutex_count);
+	pthread_mutex_unlock(&philo->mutex_last_eat);
 }

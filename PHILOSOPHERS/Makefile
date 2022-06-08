@@ -5,6 +5,8 @@ S = philo_M/
 SRC = 	$Smain.c \
 		$Sutils.c	\
 		$Sdestroy.c \
+		$Sprint.c \
+		$Sdata_rice.c \
 		$Sstarter.c	\
 
 PROJECT_H	= $Sphilosophers.h
@@ -15,7 +17,7 @@ RM = @rm -rf
 
 PTHEAD_FLAG = -pthread
 CC			= gcc
-CC_FLAGS	= -Wall -Werror -Wextra
+CC_FLAGS	= -Wall -Werror -Wextra -fsanitize=thread -g
 
 
 $(NAME): $(SRC)

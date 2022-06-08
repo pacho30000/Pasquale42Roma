@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 23:37:51 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/08 00:09:00 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/09 01:29:40 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,22 @@ void	ft_destroy(t_main *istance)
 	i = 0;
 	pthread_mutex_destroy(&istance->mutex_write);
 	pthread_mutex_destroy(istance->forks);
+	pthread_mutex_destroy(&istance->mutex_stop);
 	while (i < istance->number_of_philosophers)
 	{
 		pthread_mutex_destroy(&istance->philosophers[i]->mutex_eating);
+		pthread_mutex_destroy(&istance->philosophers[i]->mutex_count);
+		pthread_mutex_destroy(&istance->philosophers[i]->mutex_last_eat);
 		i++;
 	}
 	i = 0;
-	while (i < istance->number_of_philosophers)
-	{
-		//pthread_join(istance->philosophers[i]->philosophers_thread, NULL);
-		//pthread_join(istance->philosophers[i]->philosophers_thread, NULL);
-		i++;
-	}
+	// while (i < istance->number_of_philosophers)
+	// {
+	// 	pthread_join(istance->philosophers[i]->philosophers_thread, NULL);
+	// 	pthread_join(istance->philosophers[i]->check_death_philosophers, NULL);
+	// 	i++;
+	// }
+	i = 0;
 	free (istance->forks);
 	free (istance->philosophers);
 }

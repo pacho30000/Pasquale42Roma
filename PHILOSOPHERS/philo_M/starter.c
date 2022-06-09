@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 19:37:47 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/09 01:23:45 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/09 17:08:58 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,15 @@ t_philosophers	**ft_philosophers_start(t_main *istance)
 									istance->number_of_philosophers);
 	if (!philo)
 		return (NULL);
-	i = 0;
-	while (i < (int)istance->number_of_philosophers)
+	i = -1;
+	while (++i < (int)istance->number_of_philosophers)
 	{
 		philo[i] = (t_philosophers *)malloc(sizeof(t_philosophers) * 1);
 		if (!philo[i])
 			return (NULL);
-		if (pthread_mutex_init(&philo[i]->mutex_eating, NULL))
-			return (NULL);
-		if (pthread_mutex_init(&philo[i]->mutex_last_eat, NULL))
-			return (NULL);
-		if (pthread_mutex_init(&philo[i]->mutex_count, NULL))
+		if (pthread_mutex_init(&philo[i]->mutex_eating, NULL) || \
+			pthread_mutex_init(&philo[i]->mutex_last_eat, NULL) || \
+			pthread_mutex_init(&philo[i]->mutex_count, NULL))
 			return (NULL);
 		philo[i]->philosophers_number = i;
 		philo[i]->istance = istance;
@@ -87,7 +85,6 @@ t_philosophers	**ft_philosophers_start(t_main *istance)
 		philo[i]->count = 0;
 		philo[i]->left_fork = i;
 		philo[i]->right_fork = (i + 1) % istance->number_of_philosophers;
-		i++;
 	}
 	return (philo);
 }

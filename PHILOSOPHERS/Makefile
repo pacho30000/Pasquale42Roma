@@ -17,7 +17,7 @@ RM = @rm -rf
 
 PTHEAD_FLAG = -pthread
 CC			= gcc
-CC_FLAGS	= -Wall -Werror -Wextra -fsanitize=thread -g
+CC_FLAGS	= -Wall -Werror -Wextra
 
 
 $(NAME): $(SRC)

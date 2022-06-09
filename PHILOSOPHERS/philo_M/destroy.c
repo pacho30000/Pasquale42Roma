@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 23:37:51 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/09 01:29:40 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/09 16:49:01 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ void	ft_destroy(t_main *istance)
 	pthread_mutex_destroy(&istance->mutex_stop);
 	while (i < istance->number_of_philosophers)
 	{
+		pthread_mutex_destroy(&istance->philosophers[i]->mutex_last_eat);
 		pthread_mutex_destroy(&istance->philosophers[i]->mutex_eating);
 		pthread_mutex_destroy(&istance->philosophers[i]->mutex_count);
-		pthread_mutex_destroy(&istance->philosophers[i]->mutex_last_eat);
+		//free (&istance->philosophers[i]);
 		i++;
 	}
 	i = 0;
 	// while (i < istance->number_of_philosophers)
 	// {
 	// 	pthread_join(istance->philosophers[i]->philosophers_thread, NULL);
-	// 	pthread_join(istance->philosophers[i]->check_death_philosophers, NULL);
 	// 	i++;
 	// }
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:22:55 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/09 00:05:45 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/09 17:05:04 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 typedef struct s_philosophers
 {
 	pthread_t		philosophers_thread;
-	pthread_t		check_death_philosophers;
 	int				philosophers_number;
 	int				last_eat;
 	int				count;
@@ -57,30 +56,44 @@ typedef struct s_main
 }				t_main;
 
 // Utils.c
-int				ft_atoi(const char *str);
+/*
+In this file find all funcion utils
+*/
+void			ft_usleep(uint64_t time_in_ms);
+int				ft_convert(const char *str);
 int				ft_get_time(void);
 int				ft_check_arguments(int argc, char **argv);
-int				ft_convert(const char *str);
-void			ft_usleep(uint64_t time_in_ms);
 
 // Print.c
-int				ft_error(int error);
+/*
+In this file find all funcion for print
+*/
 void			ft_message_shell(t_main *istance, int philosophers_number, \
 								char *txt);
+int				ft_error(int error);
 
 // Starter.c
-void			ft_take_fork(t_philosophers *philo);
-t_main			*ft_start(int argc, char **argv);
+/*
+In this file find the funcion for create the forks, philosophere, istance and
+take the fork, that call the ft_routine in main 
+*/
 t_philosophers	**ft_philosophers_start(t_main *istance);
 pthread_mutex_t	*ft_start_fork(t_main *istance);
+t_main			*ft_start(int argc, char **argv);
+void			ft_take_fork(t_philosophers *philo);
 
 // Data_rice.c
+/*
+In this file find all funcion block the data rice
+*/
 int				ft_mutex_stop(t_main *istance);
 int				ft_mutex_last_eat(t_philosophers *istance);
 int				ft_mutex_count(t_philosophers *philo);
-int				ft_mutex_eating(t_philosophers *philo);
 
 // Destroy.c
+/*
+In this file find the funcion for destroy all mutex and make the free
+*/
 void			ft_destroy(t_main *istance);
 
 #endif

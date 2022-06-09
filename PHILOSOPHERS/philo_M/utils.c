@@ -6,28 +6,11 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:49:40 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/08 23:49:59 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/09 16:54:50 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-int	ft_check_arguments(int argc, char **argv)
-{
-	if (argc < 5 || argc > 6)
-		return (ERROR_NUMBER_ARGUMENTS);
-	if (ft_atoi(argv[1]) || ft_atoi(argv[2]) \
-	|| ft_atoi(argv[3]) || ft_atoi(argv[4]))
-		return (ERROR_ARGUMENTS);
-	if (ft_convert(argv[1]) <= 0)
-		return (ERROE_ZERO);
-	if (argc == 6)
-	{
-		if (ft_atoi(argv[5]))
-			return (ERROR_ARGUMENTS);
-	}
-	return (0);
-}
 
 int	ft_get_time(void)
 {
@@ -81,4 +64,21 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (false);
+}
+
+int	ft_check_arguments(int argc, char **argv)
+{
+	if (argc < 5 || argc > 6)
+		return (ERROR_NUMBER_ARGUMENTS);
+	if (ft_atoi(argv[1]) || ft_atoi(argv[2]) \
+	|| ft_atoi(argv[3]) || ft_atoi(argv[4]))
+		return (ERROR_ARGUMENTS);
+	if (ft_convert(argv[1]) <= 0)
+		return (ERROE_ZERO);
+	if (argc == 6)
+	{
+		if (ft_atoi(argv[5]))
+			return (ERROR_ARGUMENTS);
+	}
+	return (0);
 }

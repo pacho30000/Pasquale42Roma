@@ -6,12 +6,22 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 17:31:35 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/01/16 19:11:30 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/24 01:28:01 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * @brief Write the number in str for compleat the conversion
+ * 
+ * @param str	Where write the number
+ * @param nb	Copy of number
+ * @param len	Length of number
+ * @param n		Original number
+ * 
+ * @return void* 
+ */
 static	void	*ft_digit(char *str, long nb, size_t len, int n)
 {
 	size_t	s;
@@ -37,7 +47,14 @@ static	void	*ft_digit(char *str, long nb, size_t len, int n)
 	return (*(&str));
 }
 
-static int	ft_len(long nb)
+/**
+ * @brief Search the length of number
+ * 
+ * @param nb Numbert of to search length
+ * 
+ * @return int is the length
+ */
+static int	ft_len_num(long nb)
 {
 	int	i;
 
@@ -57,6 +74,13 @@ static int	ft_len(long nb)
 	return (i);
 }
 
+/**
+ * @brief Convert the int in string
+ * 
+ * @param n in the to convert
+ * 
+ * @return char* 
+ */
 char	*ft_itoa(int n)
 {
 	char	*str;
@@ -64,7 +88,7 @@ char	*ft_itoa(int n)
 	long	nb;
 
 	nb = n;
-	len = ft_len(nb);
+	len = ft_len_num(nb);
 	str = (char *)malloc(sizeof (char) * len + 1);
 	if (!str)
 		return (NULL);

@@ -1,15 +1,14 @@
 NAME		= philo
 
-S = philo_M/
 
-SRC = 	$Smain.c \
-		$Sutils.c	\
-		$Sdestroy.c \
-		$Sprint.c \
-		$Sdata_rice.c \
-		$Sstarter.c	\
+SRC = 	main.c \
+		utils.c	\
+		destroy.c \
+		print.c \
+		data_rice.c \
+		starter.c	\
 
-PROJECT_H	= $Sphilosophers.h
+PROJECT_H	= philosophers.h
 
 OBJS = $(SRC:%.c=%.o)
 
@@ -17,7 +16,7 @@ RM = @rm -rf
 
 PTHEAD_FLAG = -pthread
 CC			= gcc
-CC_FLAGS	= -Wall -Werror -Wextra
+CC_FLAGS	= -Wall -Werror -Wextra #-fsanitize=thread
 
 
 $(NAME): $(SRC)

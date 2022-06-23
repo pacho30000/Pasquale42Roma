@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:22:22 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/09 17:06:38 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/09 19:09:13 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,33 @@
 /*
 Check if are take the limit of eat philosophers
 */
-void	ft_check_eat(t_philosophers *philo)
+void	ft_check_eat(t_main *istance)
 {
-	int	i;
+	t_philosophers	*philo;
+	int				i;
 
-	i = 0;
-	pthread_mutex_lock(&philo->mutex_eating);
-	while (i < philo->istance->number_of_philosophers)
+	i = -1;
+	while (++i < istance->number_of_philosophers)
 	{
-		if (ft_mutex_count(philo) >= \
-				philo->istance->number_philosopher_must_eat)
+		philo = istance->philosophers[i];
+		pthread_mutex_lock(&philo->mutex_eating);
+		if (ft_mutex_count(philo) >= istance->number_philosopher_must_eat)
 		{
-			if (i == philo->istance->number_of_philosophers - 1)
+			if (i == istance->number_of_philosophers - 1)
 			{
-				pthread_mutex_lock(&philo->istance->mutex_write);
-				pthread_mutex_lock(&philo->istance->mutex_stop);
-				philo->istance->stop = 0;
-				pthread_mutex_unlock(&philo->istance->mutex_stop);
+				pthread_mutex_lock(&istance->mutex_write);
+				pthread_mutex_lock(&istance->mutex_stop);
+				istance->stop = 0;
+				pthread_mutex_unlock(&istance->mutex_stop);
 			}
-			i++;
 		}
 		else
+		{
+			pthread_mutex_unlock(&philo->mutex_eating);
 			break ;
+		}
+		pthread_mutex_unlock(&philo->mutex_eating);
 	}
-	pthread_mutex_unlock(&philo->mutex_eating);
 }
 
 /*
@@ -58,19 +61,15 @@ void	*ft_check_death(t_main *istance)
 			if (ft_get_time() - ft_mutex_last_eat(istance->philosophers[i]) >= \
 								istance->time_to_die)
 			{
-				pthread_mutex_lock(&istance->philosophers[i]->mutex_eating);
 				ft_message_shell(istance, \
 					istance->philosophers[i]->philosophers_number, "died");
 				pthread_mutex_lock(&istance->mutex_stop);
 				istance->stop = 0;
 				pthread_mutex_unlock(&istance->mutex_stop);
-				pthread_mutex_unlock(&istance->philosophers[i]->mutex_eating);
 			}
-			if (istance->number_philosopher_must_eat
-				&& ft_mutex_count(istance->philosophers[i]) >= \
-					istance->number_philosopher_must_eat)
-				ft_check_eat(istance->philosophers[i]);
 		}
+		if (istance->number_philosopher_must_eat)
+			ft_check_eat(istance);
 	}
 	return (NULL);
 }
@@ -87,7 +86,7 @@ void	*ft_routine(void *arg)
 	t_philosophers	*philo;
 
 	philo = ((t_philosophers *)arg);
-	if (philo->philosophers_number % 2 == 0)
+	if (philo->philosophers_number % 2 != 0)
 		ft_usleep(philo->istance->time_to_eat);
 	while (ft_mutex_stop(philo->istance))
 	{

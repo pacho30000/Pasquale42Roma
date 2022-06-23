@@ -6,7 +6,7 @@
 /*   By: pcatapan <pcatapan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 19:37:47 by pcatapan          #+#    #+#             */
-/*   Updated: 2022/06/09 17:08:58 by pcatapan         ###   ########.fr       */
+/*   Updated: 2022/06/09 19:08:43 by pcatapan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	ft_take_fork(t_philosophers *philo)
 	pthread_mutex_lock(&philo->mutex_last_eat);
 	pthread_mutex_lock(&philo->mutex_count);
 	philo->last_eat = ft_get_time();
+	pthread_mutex_unlock(&philo->mutex_last_eat);
 	philo->is_eating = 1;
 	ft_message_shell(philo->istance, philo->philosophers_number, "is eating");
 	ft_usleep(philo->istance->time_to_eat);
@@ -108,5 +109,4 @@ void	ft_take_fork(t_philosophers *philo)
 	philo->count++;
 	pthread_mutex_unlock(&philo->mutex_eating);
 	pthread_mutex_unlock(&philo->mutex_count);
-	pthread_mutex_unlock(&philo->mutex_last_eat);
 }
